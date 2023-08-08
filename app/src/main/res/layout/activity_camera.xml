@@ -75,7 +75,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
-                    android:text="Radha singh"
+                    android:text="searching..."
                     android:textColor="@color/white"
                     android:textSize="20dp" />
 
