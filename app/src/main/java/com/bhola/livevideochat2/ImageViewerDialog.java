@@ -4,12 +4,14 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.PointF;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.viewpager.widget.ViewPager;
 
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -89,29 +91,9 @@ class ImagePagerAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, int position) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.item_image2, container, false);
-        SubsamplingScaleImageView imageView = (SubsamplingScaleImageView) view.findViewById(R.id.imageView);
+        ImageView imageView =view.findViewById(R.id.imageView);
 
-
-        Picasso.get().load(imageUrls.get(position)).into(new Target() {
-            @Override
-            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-                imageView.setImage(ImageSource.bitmap(bitmap));
-            }
-            @Override
-            public void onBitmapFailed(Exception e, Drawable errorDrawable) {
-
-            }
-
-            @Override
-            public void onPrepareLoad(Drawable placeHolderDrawable) {
-                // Optional: You can implement placeholder behavior here
-            }
-        });
-
-
-
-//        Picasso.get().load(imageUrls.get(position)).into(imageView);
-
+        Picasso.get().load(imageUrls.get(position)).into(imageView);
         container.addView(view);
         return view;
     }

@@ -202,10 +202,10 @@ public class VipMembership extends AppCompatActivity {
 
         productIds.add("coins200");
         productIds.add("coins500");
-        productIds.add("coins3000");
+        productIds.add("coins3001");
         productIds.add("coins200_offer");
         productIds.add("coins500_offer");
-        productIds.add("coins3000_offer");
+        productIds.add("coins3001_offer");
 
 // Add more product IDs as needed
 
@@ -611,10 +611,10 @@ public class VipMembership extends AppCompatActivity {
 
         }
         for (ProductDetails productDetails : productDetailsList) {
-            if (productDetails.getProductId().equals("coins3000")) {
+            if (productDetails.getProductId().equals("coins3001")) {
                 mlist.add(productDetails);
             }
-            if (productDetails.getProductId().equals("coins3000_offer")) {
+            if (productDetails.getProductId().equals("coins3001_offer")) {
                 mlist_offer.add(productDetails);
             }
 

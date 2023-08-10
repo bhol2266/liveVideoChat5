@@ -3,19 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/splashscreenbg2"
+    android:background="#FADDFF"
     android:fitsSystemWindows="true">
 
 
     <com.airbnb.lottie.LottieAnimationView
         android:layout_width="match_parent"
+        android:padding="80dp"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_alignParentTop="true"
-        app:lottie_autoPlay="true"
         android:layout_above="@id/progressbar"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        app:lottie_autoPlay="true"
+        app:lottie_repeatCount="5"
         app:lottie_rawRes="@raw/splashscreen_lottie_main"
-        app:lottie_speed="0.5" />
+        app:lottie_speed="1" />
 
 
 
@@ -37,7 +39,7 @@
             android:gravity="center"
             android:fontFamily="@font/rubrik_bold"
             android:elevation="10dp"
-            android:text="Desi Girls - Live Video Chat"
+            android:text="@string/app_name"
             android:textColor="@color/semiblack"
             android:textSize="27dp"
             />
