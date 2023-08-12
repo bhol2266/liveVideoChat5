@@ -3,11 +3,17 @@ package com.bhola.livevideochat2;
 import android.animation.Animator;
 import android.app.Activity;
 import android.app.ActivityManager;
+import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
@@ -28,6 +34,9 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 
 import com.airbnb.lottie.LottieAnimationView;
@@ -53,6 +62,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -77,7 +87,8 @@ public class VipMembership extends AppCompatActivity {
     ArrayList<ProductDetails> mlist_offer;
     final int[] selectedCard = {-1};
     Button btnContinue;
-
+    private static final String CHANNEL_ID = "notification_channel_id";
+    private static final int REQUEST_CODE = 123;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,6 +126,7 @@ public class VipMembership extends AppCompatActivity {
 //                            snackbar.show();
                             progressBar.setVisibility(View.GONE);
 
+                            cancelScheduledAlarm();
                             startActivity(new Intent(VipMembership.this, SplashScreen.class));
 
                         }
@@ -142,6 +154,8 @@ public class VipMembership extends AppCompatActivity {
         });
         checkTimeRunning();
 
+
+//        createNotificationChannel();
 
     }
 
@@ -794,9 +808,41 @@ public class VipMembership extends AppCompatActivity {
             exit_dialog();
             backpressCount++;
         } else {
+
+
+            showNotification();
             super.onBackPressed();
         }
 
+    }
+
+
+    private void cancelScheduledAlarm() {
+        Intent intent = new Intent(this, NotificationReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, REQUEST_CODE, intent, PendingIntent.FLAG_IMMUTABLE);
+
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        if (alarmManager != null) {
+            alarmManager.cancel(pendingIntent);
+        }
+    }
+    private void showNotification() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.MINUTE, 30);
+
+        Intent intent = new Intent(this, NotificationReceiver.class);
+
+        SharedPreferences sh = VipMembership.this.getSharedPreferences("UserInfo", MODE_PRIVATE);
+        String fullname = sh.getString("name", "not set");
+
+
+        intent.putExtra("USERNAME", fullname); // Pass the data here
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, REQUEST_CODE, intent, PendingIntent.FLAG_IMMUTABLE);
+
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        if (alarmManager != null) {
+            alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+        }
     }
 
 

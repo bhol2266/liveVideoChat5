@@ -103,6 +103,7 @@
             </intent-filter>
         </service>
         <service android:name=".BotMessageService" />
+        <receiver android:name=".NotificationReceiver" />
 
         <service
             android:name=".TimerService"

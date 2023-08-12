@@ -23,8 +23,6 @@ import java.net.URL;
 
 public class FirebaseMessagingService extends com.google.firebase.messaging.FirebaseMessagingService {
 
-    NotificationManager mNotificationManager;
-
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
@@ -81,8 +79,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         builder.setAutoCancel(true);
         builder.setPriority(Notification.PRIORITY_MAX);
 
-        mNotificationManager =
-                (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationManager mNotificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
