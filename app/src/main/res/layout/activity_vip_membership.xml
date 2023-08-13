@@ -116,9 +116,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="left|bottom"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginRight="20dp"
-            android:layout_marginBottom="5dp"
             android:orientation="vertical">
 
             <LinearLayout
@@ -196,447 +195,142 @@
 
         </LinearLayout>
 
-        <FrameLayout
+
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ProgressBar
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:indeterminateTint="@color/themeColor" />
-
-            <LinearLayout
-                android:id="@+id/cardsLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
-                android:orientation="horizontal"
-                android:padding="5dp"
-                android:visibility="invisible">
-
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cardView1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginBottom="20dp"
-                    android:layout_weight="1"
-                    app:cardBackgroundColor="@color/white"
-                    app:cardCornerRadius="10dp"
-                    app:cardElevation="10dp"
-                    app:contentPadding="5dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:background="@drawable/rounded_background_vipcard"
-                            android:orientation="vertical"
-                            android:paddingLeft="10dp"
-                            android:paddingTop="10dp"
-                            android:paddingRight="10dp">
-
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:fontFamily="@font/inter"
-                                android:text="200"
-                                android:textColor="@color/black"
-                                android:textSize="27dp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:fontFamily="@font/inter"
-                                android:text="Coins"
-                                android:textColor="@color/gmts_light_gray"
-                                android:textSize="15dp" />
-
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:padding="5dp"
-                                android:src="@drawable/dollar" />
-
-                            <TextView
-                                android:id="@+id/discountRate1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginTop="10dp"
-                                android:fontFamily="@font/inter"
-                                android:text="20% Off"
-                                android:textColor="@color/themeColor"
-                                android:textSize="12dp"
-                                android:textStyle="bold"
-                                android:visibility="gone" />
-
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:orientation="horizontal"
-                            android:paddingTop="3dp"
-                            android:paddingBottom="5dp">
-
-                            <TextView
-                                android:id="@+id/mrp1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_margin="3dp"
-                                android:layout_marginRight="2dp"
-                                android:fontFamily="@font/inter"
-                                android:text="$99"
-                                android:textColor="@color/grey"
-                                android:textSize="15dp"
-                                android:visibility="gone" />
-
-                            <TextView
-                                android:id="@+id/price1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_margin="3dp"
-
-                                android:layout_marginLeft="2dp"
-                                android:fontFamily="@font/inter"
-                                android:text="$99"
-                                android:textColor="@color/black"
-                                android:textSize="16dp" />
-
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cardView2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginBottom="20dp"
-                    android:layout_weight="1"
-                    app:cardCornerRadius="10dp"
-                    app:cardElevation="10dp"
-                    app:contentPadding="5dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:background="@drawable/rounded_background_vipcard"
-                            android:orientation="vertical"
-                            android:paddingLeft="10dp"
-                            android:paddingTop="10dp"
-                            android:paddingRight="10dp">
-
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:fontFamily="@font/inter"
-                                android:text="500"
-                                android:textColor="@color/black"
-                                android:textSize="27dp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:fontFamily="@font/inter"
-                                android:text="Coins"
-                                android:textColor="@color/gmts_light_gray"
-                                android:textSize="15dp" />
-
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:padding="5dp"
-                                android:src="@drawable/dollar" />
-
-                            <TextView
-                                android:id="@+id/discountRate2"
-
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginTop="10dp"
-                                android:fontFamily="@font/inter"
-                                android:text="20% Off"
-                                android:textColor="@color/themeColor"
-                                android:textSize="12dp"
-
-                                android:textStyle="bold"
-                                android:visibility="gone" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:orientation="horizontal"
-                            android:paddingTop="3dp"
-                            android:paddingBottom="5dp">
-
-                            <TextView
-                                android:id="@+id/mrp2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_margin="3dp"
-                                android:layout_marginRight="2dp"
-                                android:fontFamily="@font/inter"
-                                android:text="$99"
-                                android:textColor="@color/grey"
-                                android:textSize="15dp"
-                                android:visibility="gone" />
-
-                            <TextView
-                                android:id="@+id/price2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_margin="3dp"
-
-                                android:layout_marginLeft="2dp"
-                                android:fontFamily="@font/inter"
-                                android:text="$99"
-                                android:textColor="@color/black"
-                                android:textSize="16dp" />
-
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cardView3"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginBottom="20dp"
-                    android:layout_weight="1"
-                    app:cardCornerRadius="10dp"
-                    app:cardElevation="10dp"
-                    app:contentPadding="5dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:background="@drawable/rounded_background_vipcard"
-                            android:orientation="vertical"
-                            android:paddingLeft="10dp"
-                            android:paddingTop="10dp"
-                            android:paddingRight="10dp">
-
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:fontFamily="@font/inter"
-                                android:text="3000"
-                                android:textColor="@color/black"
-                                android:textSize="27dp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:fontFamily="@font/inter"
-                                android:text="Coins"
-                                android:textColor="@color/gmts_light_gray"
-                                android:textSize="15dp" />
-
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:padding="5dp"
-                                android:src="@drawable/dollar" />
-
-                            <TextView
-                                android:id="@+id/discountRate3"
-
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginTop="10dp"
-                                android:fontFamily="@font/inter"
-                                android:text="20% Off"
-                                android:textColor="@color/themeColor"
-                                android:textSize="12dp"
-                                android:textStyle="bold"
-                                android:visibility="gone" />
-
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:orientation="horizontal"
-                            android:paddingTop="3dp"
-                            android:paddingBottom="5dp">
-
-                            <TextView
-                                android:id="@+id/mrp3"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_margin="3dp"
-                                android:layout_marginRight="2dp"
-                                android:fontFamily="@font/inter"
-                                android:text="$99"
-                                android:textColor="@color/grey"
-                                android:textSize="15dp"
-                                android:visibility="gone" />
-
-                            <TextView
-                                android:id="@+id/price3"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_margin="3dp"
-
-                                android:layout_marginLeft="2dp"
-                                android:fontFamily="@font/inter"
-                                android:text="$99"
-                                android:textColor="@color/black"
-                                android:textSize="16dp" />
-
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-
-                </androidx.cardview.widget.CardView>
-
-
-            </LinearLayout>
-
-        </FrameLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/transparent"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/offerTimer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="7dp"
-                android:fontFamily="@font/inter"
-                android:text="Offer ends in 59:00"
-                android:textColor="@color/gmts_light_gray"
-                android:textSize="16dp"
-                android:visibility="gone" />
-
-            <Button
-                android:id="@+id/btnContinue"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:fontFamily="@font/inter"
-                android:text="CONTINUE"
-                app:backgroundTint="@color/themeColor" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:text="Recurring billing, cancel anytime. By tapping Continue, your payment will be charged to your Google account, and your subscription will automatically renew for the same package length at the same price until you cancel on your Google account settings at least 24 hours prior to the end of the current period. By tapping Continue, you agree to our"
-                android:textAlignment="center"
-                android:textColor="@color/gmts_light_gray"
-                android:textSize="12dp" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/terms"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="User Agreement"
-                    android:textAlignment="center"
-                    android:textColor="@color/gmts_light_gray"
-                    android:textSize="14dp" />
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:text="&amp;"
-                    android:textAlignment="center"
-                    android:textColor="@color/gmts_light_gray"
-                    android:textSize="12dp" />
+                    <ProgressBar
+                        android:id="@+id/proressbarRecycleview"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:indeterminateTint="@color/themeColor" />
 
-                <TextView
-                    android:id="@+id/privacy"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Privacy Policy"
-                    android:textAlignment="center"
-                    android:textColor="@color/gmts_light_gray"
-                    android:textSize="14dp" />
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:columnCount="3"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:rowCount="2" />
 
+
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="50dp"
+
+                    android:background="@android:color/transparent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+
+                        <TextView
+                            android:id="@+id/offerTextview"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="15dp"
+                            android:fontFamily="@font/inter"
+                            android:text="20% Off"
+                            android:textColor="@color/themeColor"
+                            android:textSize="17dp"
+                            android:textStyle="bold"
+                            android:visibility="gone" />
+
+                        <TextView
+                            android:id="@+id/offerTimer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/inter"
+                            android:text="Offer ends in 59:00"
+                            android:textColor="@color/gmts_light_gray"
+                            android:textSize="16dp"
+                            android:visibility="gone" />
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/btnContinue"
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/inter"
+                        android:text="CONTINUE"
+                        app:backgroundTint="@color/themeColor" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="Recurring billing, cancel anytime. By tapping Continue, your payment will be charged to your Google account, and your subscription will automatically renew for the same package length at the same price until you cancel on your Google account settings at least 24 hours prior to the end of the current period. By tapping Continue, you agree to our"
+                        android:textAlignment="center"
+                        android:textColor="@color/gmts_light_gray"
+                        android:textSize="12dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/terms"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="User Agreement"
+                            android:textAlignment="center"
+                            android:textColor="@color/gmts_light_gray"
+                            android:textSize="14dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:text="&amp;"
+                            android:textAlignment="center"
+                            android:textColor="@color/gmts_light_gray"
+                            android:textSize="12dp" />
+
+                        <TextView
+                            android:id="@+id/privacy"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Privacy Policy"
+                            android:textAlignment="center"
+                            android:textColor="@color/gmts_light_gray"
+                            android:textSize="14dp" />
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
 
             </LinearLayout>
 
-        </LinearLayout>
+        </ScrollView>
+
 
     </LinearLayout>
 
