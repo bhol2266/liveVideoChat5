@@ -9,6 +9,7 @@ public class ChatItem_ModelClass {
     private String gender;
     private String age;
     private String country;
+    private  ArrayList<String> contentImages;
     private String users;
     private String answerRate;
     private String userProfile;
@@ -20,12 +21,13 @@ public class ChatItem_ModelClass {
     public ChatItem_ModelClass() {
     }
 
-    public ChatItem_ModelClass(int id, String userName, String gender, String age, String country, String users, String answerRate, String userProfile, boolean containsQuestion, String recommendationType, ArrayList<UserBotMsg> userBotMsg, UserQuestionWithAns questionWithAns) {
+    public ChatItem_ModelClass(int id, String userName, String gender, String age, String country, ArrayList<String> contentImages, String users, String answerRate, String userProfile, boolean containsQuestion, String recommendationType, ArrayList<UserBotMsg> userBotMsg, UserQuestionWithAns questionWithAns) {
         this.id = id;
         this.userName = userName;
         this.gender = gender;
         this.age = age;
         this.country = country;
+        this.contentImages = contentImages;
         this.users = users;
         this.answerRate = answerRate;
         this.userProfile = userProfile;
@@ -73,6 +75,14 @@ public class ChatItem_ModelClass {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public ArrayList<String> getContentImages() {
+        return contentImages;
+    }
+
+    public void setContentImages(ArrayList<String> contentImages) {
+        this.contentImages = contentImages;
     }
 
     public String getUsers() {

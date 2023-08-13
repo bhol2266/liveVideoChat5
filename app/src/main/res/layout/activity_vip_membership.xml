@@ -659,8 +659,8 @@
             android:layout_gravity="center"
             android:layout_marginRight="10dp"
 
-            android:backgroundTint="#AD5312"
-            android:indeterminateTint="#AD5312" />
+            android:backgroundTint="@color/themeColor"
+            android:indeterminateTint="@color/themeColor" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -670,7 +670,7 @@
             android:fontFamily="@font/inter"
             android:gravity="center"
             android:text="processing.."
-            android:textColor="#FDE4C7"
+            android:textColor="@color/white"
             android:textSize="25dp" />
     </LinearLayout>
 

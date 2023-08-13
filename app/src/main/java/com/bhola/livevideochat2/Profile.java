@@ -6,13 +6,18 @@ import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.RenderEffect;
+import android.graphics.Shader;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.InsetDrawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -23,6 +28,8 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Profile extends AppCompatActivity {
 
@@ -31,15 +38,16 @@ public class Profile extends AppCompatActivity {
     AlertDialog report_user_dialog = null;
     AlertDialog report_userSucessfully_dialog = null;
     GridLayout gridLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         if (SplashScreen.Ads_State.equals("active")) {
-            showAds();
+//            showAds();
         }
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_profile_girl);
 //        getSupportActionBar().hide();
 
@@ -248,8 +256,6 @@ public class Profile extends AppCompatActivity {
     }
 
 
-
-
     private void setRatingBar() {
 
         RatingBar ratingBar = findViewById(R.id.ratingBar);
@@ -266,19 +272,37 @@ public class Profile extends AppCompatActivity {
     private void setImageinGridLayout() {
 
         gridLayout = findViewById(R.id.gridLayout);
-        ArrayList<String> imageList = new ArrayList<>();
-        imageList.add(modelClass.getUserProfile());
+        ArrayList<Map<String, String>> imageList = new ArrayList<>();
+
+        Map<String, String> stringMap = new HashMap<>();
+        stringMap.put("url", modelClass.getUserProfile());
+        stringMap.put("type", "free");
+        imageList.add(stringMap);
 
         for (int i = 0; i < modelClass.getUserBotMsg().size(); i++) {
             String extraMsg = "";
             extraMsg = modelClass.getUserBotMsg().get(i).getExtraMsg();
             if (extraMsg.length() > 5 && extraMsg.contains(".jpg") || extraMsg.contains(".png")) {
-                imageList.add(extraMsg);
+
+                Map<String, String> stringMap1 = new HashMap<>();
+                stringMap1.put("url", extraMsg);
+                stringMap1.put("type", "free");
+                imageList.add(stringMap1);
             }
         }
 
-        for (int i = 0; i <imageList.size() ; i++) {
+        if (modelClass.getContentImages() != null) {
+            for (int i = 0; i < modelClass.getContentImages().size(); i++) {
 
+                Map<String, String> stringMap1 = new HashMap<>();
+                stringMap1.put("url", modelClass.getContentImages().get(i));
+                stringMap1.put("type", "premium");
+                imageList.add(stringMap1);
+            }
+        }
+
+
+        for (int i = 0; i < imageList.size(); i++) {
 
 
             // Create a new CardView
@@ -291,15 +315,25 @@ public class Profile extends AppCompatActivity {
             cardView.setElevation(elevation);
 
 
-// Create a new ImageView
             ImageView imageView = new ImageView(this);
+            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
-// Set the desired image resource or drawable to the ImageView
-            Picasso.get().load(imageList.get(i)).into(imageView);
+            Picasso.get().load(imageList.get(i).get("url")).into(imageView);
+
+            if (SplashScreen.coins == 0) {
+
+                if (imageList.get(i).get("type").equals("premium")) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                        imageView.setRenderEffect(RenderEffect.createBlurEffect(20, 20, Shader.TileMode.MIRROR));
+                    }
+                }
+            }
 
 // Set layout parameters for width and height
-            int sizeInPixels = (int) (80 * getResources().getDisplayMetrics().density); // Set the desired size in dp
-            CardView.LayoutParams layoutParams = new CardView.LayoutParams(sizeInPixels, sizeInPixels);
+            int widthInPixels = (int) (80 * getResources().getDisplayMetrics().density); // Desired width in dp
+            int heightInPixels = (int) ((widthInPixels * 4) / 3.5); // Calculated height to maintain 4:3 ratio
+
+            CardView.LayoutParams layoutParams = new CardView.LayoutParams(widthInPixels, heightInPixels);
             layoutParams.setMargins(10, 10, 10, 10);
 
 // Add the ImageView to the CardView
@@ -315,8 +349,6 @@ public class Profile extends AppCompatActivity {
                     dialog.show();
                 }
             });
-
-
 
 
 // Add the CardView to the GridLayout

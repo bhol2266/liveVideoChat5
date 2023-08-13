@@ -46,6 +46,8 @@ import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -755,13 +757,22 @@ class ChatsAdapter extends RecyclerView.Adapter {
                 reciverViewHolder.picMsgLayout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        ArrayList<String> imageList = new ArrayList<>();
-                        imageList.add(modelClass.getUserProfile());
+                        ArrayList<Map<String,String>> imageList = new ArrayList<>();
+
+                        Map<String, String> stringMap = new HashMap<>();
+                        stringMap.put("url", modelClass.getUserProfile());
+                        stringMap.put("type", "free");
+                        imageList.add(stringMap);
+
+
                         for (int i = 0; i < modelClass.getUserBotMsg().size(); i++) {
                             String extraMsg = "";
                             extraMsg = modelClass.getUserBotMsg().get(i).getExtraMsg();
                             if (extraMsg.length() > 5 && extraMsg.contains(".jpg") || extraMsg.contains(".png")) {
-                                imageList.add(extraMsg);
+                                Map<String, String> stringMap2 = new HashMap<>();
+                                stringMap2.put("url",extraMsg);
+                                stringMap2.put("type", "free");
+                                imageList.add(stringMap2);
                             }
                         }
 

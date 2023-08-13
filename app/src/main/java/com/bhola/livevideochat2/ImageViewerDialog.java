@@ -2,16 +2,16 @@ package com.bhola.livevideochat2;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.graphics.Bitmap;
+import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.PointF;
+import android.graphics.RenderEffect;
+import android.graphics.Shader;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.viewpager.widget.ViewPager;
 
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,20 +21,18 @@ import android.widget.ImageView;
 
 import androidx.viewpager.widget.PagerAdapter;
 
-import com.davemorrissey.labs.subscaleview.ImageSource;
-import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 
 public class ImageViewerDialog extends Dialog {
     private Context context;
-    private ArrayList<String> imageUrls;
+    private ArrayList<Map<String, String>> imageUrls;
     private int selectedIndex;
 
-    public ImageViewerDialog(Context context, ArrayList<String> imageUrls, int selectedIndex) {
+    public ImageViewerDialog(Context context, ArrayList<Map<String, String>> imageUrls, int selectedIndex) {
         super(context, android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen);
         this.context = context;
         this.imageUrls = imageUrls;
@@ -70,9 +68,9 @@ public class ImageViewerDialog extends Dialog {
 
 class ImagePagerAdapter extends PagerAdapter {
     private Context context;
-    private ArrayList<String> imageUrls;
+    private ArrayList<Map<String, String>> imageUrls;
 
-    public ImagePagerAdapter(Context context, ArrayList<String> imageUrls) {
+    public ImagePagerAdapter(Context context, ArrayList<Map<String, String>> imageUrls) {
         this.context = context;
         this.imageUrls = imageUrls;
     }
@@ -91,9 +89,28 @@ class ImagePagerAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, int position) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.item_image2, container, false);
-        ImageView imageView =view.findViewById(R.id.imageView);
+        ImageView imageView = view.findViewById(R.id.imageView);
 
-        Picasso.get().load(imageUrls.get(position)).into(imageView);
+        Picasso.get().load(imageUrls.get(position).get("url")).into(imageView);
+
+        if (SplashScreen.coins ==0 ) {
+            if (imageUrls.get(position).get("type").equals("premium")) {
+
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                    imageView.setRenderEffect(RenderEffect.createBlurEffect(80, 80, Shader.TileMode.MIRROR));
+                }
+                ImageView lock = view.findViewById(R.id.lock);
+                lock.setVisibility(View.VISIBLE);
+                lock.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        context.startActivity(new Intent(context, VipMembership.class));
+                    }
+                });
+            }
+
+        }
         container.addView(view);
         return view;
     }
