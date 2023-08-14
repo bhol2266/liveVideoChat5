@@ -98,7 +98,7 @@ class ImagePagerAdapter extends PagerAdapter {
 
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                    imageView.setRenderEffect(RenderEffect.createBlurEffect(80, 80, Shader.TileMode.MIRROR));
+                    imageView.setRenderEffect(RenderEffect.createBlurEffect(100, 100, Shader.TileMode.MIRROR));
                 }
                 ImageView lock = view.findViewById(R.id.lock);
                 lock.setVisibility(View.VISIBLE);
