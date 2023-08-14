@@ -761,8 +761,6 @@ public class VipMembership extends AppCompatActivity {
             exit_dialog();
             backpressCount++;
         } else {
-
-
             showNotification();
             super.onBackPressed();
         }
@@ -781,8 +779,10 @@ public class VipMembership extends AppCompatActivity {
     }
 
     private void showNotification() {
+
+
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.MINUTE, 30);
+        calendar.add(Calendar.MINUTE, 10);
 
         Intent intent = new Intent(this, NotificationReceiver.class);
 
@@ -792,6 +792,7 @@ public class VipMembership extends AppCompatActivity {
 
         intent.putExtra("USERNAME", fullname); // Pass the data here
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, REQUEST_CODE, intent, PendingIntent.FLAG_IMMUTABLE);
+
 
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         if (alarmManager != null) {
