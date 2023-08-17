@@ -8,11 +8,11 @@ plugins {
 apply plugin: 'com.google.gms.google-services'
 
 android {
-    namespace 'com.bhola.livevideochat2'
+    namespace 'com.bhola.livevideochat3'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.bhola.livevideochat2"
+        applicationId "com.bhola.livevideochat3"
         vectorDrawables.useSupportLibrary = true
 
         minSdk 24

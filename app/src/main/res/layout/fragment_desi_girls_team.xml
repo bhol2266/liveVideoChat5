@@ -19,7 +19,8 @@
             android:id="@+id/profileimgg"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/customer_care" />
+            android:src="@drawable/customer_care"
+            app:tint="@color/themeColor" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -33,7 +34,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/rubrik_semibold"
-                android:text="Desi Video Chat Team"
+                android:text="Indian Video Chat Team"
                 android:textColor="@color/black"
                 android:textSize="18dp"
                 android:textStyle="bold" />

@@ -76,7 +76,7 @@
         app:tabIndicatorColor="@color/themeColor"
         app:tabIndicatorHeight="3dp"
         app:tabMode="fixed"
-        app:tabRippleColor="#D395FF"
+        app:tabRippleColor="#ADC9FF"
         app:tabSelectedTextAppearance="@color/themeColor"
 
         app:tabSelectedTextColor="@color/themeColor"
