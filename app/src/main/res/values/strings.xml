@@ -1,12 +1,11 @@
 <resources>
     <string name="app_name">Indian Girls - Video Chat</string>
-    <string name="app_ID">ca-app-pub-8226562131234590~1292305567</string>
+    <string name="app_ID">ca-app-pub-8226562131234590~9639269687</string>
 
 
     ADMOB Real Ads ID :
-    <string name="BannerAd">ca-app-pub-8226562131234590/3464787730</string>
-    <string name="AppOpen">ca-app-pub-8226562131234590/4788697447</string>
-    <string name="Interstitial">ca-app-pub-8226562131234590/9985183804</string>
+    <string name="AppOpen">ca-app-pub-8226562131234590/7788800262</string>
+    <string name="Interstitial">ca-app-pub-8226562131234590/2536473584</string>
 
 
     ADMOB Test Ads ID:
@@ -17,11 +16,10 @@
 <!--            <string name="Interstitial">ca-app-pub-3940256099942544/1033173712</string>-->
 
     Facebook Ads ID:
-    <string name="Facebook_BannerAdUnit">1024511185393130_1024512252059690</string>
-    <string name="Facebook_InterstitialAdUnit">1024511185393130_1024512408726341</string>
+    <string name="Facebook_InterstitialAdUnit">1271247486928045_1271248293594631</string>
 
 
-    <string name="facebook_app_id">[1024511185393130]</string>
+    <string name="facebook_app_id">[1271247486928045]</string>
 
 
     <string name="privacy_policy_link">https://sites.google.com/view/desi-girls-live-video-chat/privacypolicy</string>

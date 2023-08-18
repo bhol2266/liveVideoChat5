@@ -262,9 +262,9 @@
                     android:id="@+id/gridLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="30dp"
                     android:layout_marginTop="5dp"
                     android:columnCount="4"
+                    android:paddingBottom="30dp"
                     android:rowCount="2">
 
                 </GridLayout>
@@ -282,11 +282,11 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/voiceCall"
-
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_alignParentLeft="true"
-                android:layout_marginTop="70dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="15dp"
                 app:cardCornerRadius="50dp">
 
                 <ImageView
@@ -301,10 +301,9 @@
 
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/videoCall"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_centerHorizontal="true"
-                android:layout_marginBottom="10dp"
                 android:elevation="5dp"
                 app:lottie_autoPlay="true"
                 app:lottie_loop="true"
@@ -318,7 +317,9 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_alignParentRight="true"
-                android:layout_marginTop="70dp"
+                android:layout_marginBottom="15dp"
+
+                android:layout_marginTop="50dp"
                 app:cardCornerRadius="50dp">
 
                 <ImageView

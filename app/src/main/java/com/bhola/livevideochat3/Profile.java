@@ -280,7 +280,7 @@ public class Profile extends AppCompatActivity {
         for (int i = 0; i < modelClass.getUserBotMsg().size(); i++) {
             String extraMsg = "";
             extraMsg = modelClass.getUserBotMsg().get(i).getExtraMsg();
-            if (extraMsg.length() > 5 && extraMsg.contains(".jpg") || extraMsg.contains(".png")) {
+            if (extraMsg.length() > 5 && extraMsg.contains(".jpg") || extraMsg.contains(".png") || extraMsg.contains(".jpeg")) {
 
                 Map<String, String> stringMap1 = new HashMap<>();
                 stringMap1.put("url", extraMsg);

@@ -768,7 +768,7 @@ class ChatsAdapter extends RecyclerView.Adapter {
                         for (int i = 0; i < modelClass.getUserBotMsg().size(); i++) {
                             String extraMsg = "";
                             extraMsg = modelClass.getUserBotMsg().get(i).getExtraMsg();
-                            if (extraMsg.length() > 5 && extraMsg.contains(".jpg") || extraMsg.contains(".png")) {
+                            if (extraMsg.length() > 5 && extraMsg.contains(".jpg") || extraMsg.contains(".png") || extraMsg.contains(".jpeg")) {
                                 Map<String, String> stringMap2 = new HashMap<>();
                                 stringMap2.put("url",extraMsg);
                                 stringMap2.put("type", "free");
@@ -778,11 +778,11 @@ class ChatsAdapter extends RecyclerView.Adapter {
 
                         int index = 0;
                         for (int i = 0; i < imageList.size(); i++) {
-                            if (imageList.get(i).equals(chats.getExtraMsg())) {
+                            if (imageList.get(i).get("url").equals(chats.getExtraMsg())) {
                                 index = i;
                             }
-
                         }
+
                         ImageViewerDialog dialog = new ImageViewerDialog(context, imageList, index);
                         dialog.show();
 

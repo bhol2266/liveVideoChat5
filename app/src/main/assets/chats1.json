@@ -1,17 +1,17 @@
 {
   "users": [
     {
-      "id": 2,
-      "userName": "Madhu :)",
+      "id": 1,
+      "userName": "Kiara",
       "gender": "female",
-      "age": "26",
+      "age": "27",
       "country": "India",
       "content": [],
-      "users": "2445",
+      "users": "2380",
       "answerRate": "75",
-      "userProfile": "https://bucket2266.blr1.cdn.digitaloceanspaces.com/ChatsProfileImages/Madhu1.png",
+      "userProfile": "https://bucket2266.blr1.cdn.digitaloceanspaces.com/ChatsProfileImages/radhika.png",
       "containsQuestion": false,
-      "recommendationType": "Recommended",
+      "recommendationType": "Nearby",
       "userBotMsg": [
         {
           "id": 0,
@@ -19,101 +19,51 @@
           "mimeType": "mimeType/text",
           "extraMsg": "",
           "dateTime": "",
-          "nextMsgDelay": 30000,
-          "read": 0,
-          "sent": 0
-        },
-        {
-          "id": 1,
-          "msg": "I am Madhu",
-          "mimeType": "mimeType/text",
-          "extraMsg": "",
-          "dateTime": "",
-          "nextMsgDelay": 30000,
-          "read": 0,
-          "sent": 0
-        },
-        {
-          "id": 2,
-          "msg": "Tumhari height kitni hai?",
-          "mimeType": "mimeType/text",
-          "extraMsg": "",
-          "dateTime": "",
-          "nextMsgDelay": 30000,
-          "read": 0,
-          "sent": 0
-        },
-        {
-          "id": 3,
-          "msg": "Tumne apni profile mein bhi nahi btaya tumhari height kitni hai bolo na kuch bol kyun nahi rhe ho?",
-          "mimeType": "mimeType/text",
-          "extraMsg": "",
-          "dateTime": "",
-          "nextMsgDelay": 30000,
-          "read": 0,
-          "sent": 0
-        },
-        {
-          "id": 4,
-          "msg": "[Image]",
-          "mimeType": "mimeType/image",
-          "extraMsg": "https://bucket2266.blr1.cdn.digitaloceanspaces.com/ChatsProfileImages/madhu2.png",
-          "dateTime": "",
           "nextMsgDelay": 20000,
           "read": 0,
           "sent": 0
         },
         {
-          "id": 5,
-          "msg": "apni aek photo bhejna",
+          "id": 2,
+          "msg": "tumhara profile pic kaafi achi hai. ",
           "mimeType": "mimeType/text",
           "extraMsg": "",
           "dateTime": "",
-          "nextMsgDelay": 30000,
+          "nextMsgDelay": 5000,
           "read": 0,
           "sent": 0
         },
         {
-          "id": 6,
-          "msg": "kya ho gya bhi.",
+          "id": 3,
+          "msg": "khud ki hai tumhari?",
           "mimeType": "mimeType/text",
           "extraMsg": "",
           "dateTime": "",
-          "nextMsgDelay": 30000,
-          "read": 0,
-          "sent": 0
-        },
-        {
-          "id": 7,
-          "msg": "[Audio]",
-          "mimeType": "mimeType/audio",
-          "extraMsg": "https://aig-upload.s3-accelerate.amazonaws.com/pepper/signature/voive/0/0-08b64710-bbce-47a6-a36d-823ce65c553d.mp3",
-          "dateTime": "",
-          "nextMsgDelay": 30000,
+          "nextMsgDelay": 5000,
           "read": 0,
           "sent": 0
         }
       ]
     },
     {
-      "id": 3,
-      "userName": "💋💋Seetal",
+      "id": 2,
+      "userName": "Aanya..",
       "gender": "female",
-      "age": "24",
+      "age": "23",
       "country": "India",
       "content": [],
-      "users": "4510",
-      "answerRate": "100",
-      "userProfile": "https://bucket2266.blr1.cdn.digitaloceanspaces.com/ChatsProfileImages/sheetal.png",
+      "users": "510",
+      "answerRate": "75",
+      "userProfile": "https://bucket2266.blr1.cdn.digitaloceanspaces.com/ChatsProfileImages/avantika.png",
       "containsQuestion": true,
-      "recommendationType": "Nearby",
+      "recommendationType": "Popular",
       "userBotMsg": [],
       "questionWithAns": {
-        "question": "Hello ji?",
+        "question": "Tumhari girlfriend hai kya?",
         "dateTime": "",
         "answers": [
-          "Hi",
-          "Hello"
+          "Haan",
+          "Nahi"
         ],
         "action": "chats_update_1.json",
         "read": 0,
@@ -122,21 +72,31 @@
         "replyToUser": [
           {
             "id": 0,
-            "msg": "Kahan se ho?",
+            "msg": "Main sundar hun zyada ya woh?",
             "mimeType": "mimeType/text",
             "extraMsg": "",
             "dateTime": "",
-            "nextMsgDelay": 80000,
+            "nextMsgDelay": 5000,
             "read": 0,
             "sent": 0
           },
           {
             "id": 1,
-            "msg": "Mujhe video chat request bhejo naa..",
+            "msg": "What are your hobbies?",
             "mimeType": "mimeType/text",
             "extraMsg": "",
             "dateTime": "",
-            "nextMsgDelay": 10000,
+            "nextMsgDelay": 15000,
+            "read": 0,
+            "sent": 0
+          },
+          {
+            "id": 1,
+            "msg": "Acha! Fir mujhse dosti karna chahoge?",
+            "mimeType": "mimeType/text",
+            "extraMsg": "",
+            "dateTime": "",
+            "nextMsgDelay": 15000,
             "read": 0,
             "sent": 0
           }
@@ -144,8 +104,8 @@
       }
     },
     {
-      "id": 5,
-      "userName": "Reshma",
+      "id": 3,
+      "userName": "Sneha",
       "gender": "female",
       "age": "28",
       "country": "India",
@@ -210,7 +170,7 @@
     },
     {
       "id": 4,
-      "userName": "Dhristi",
+      "userName": "Shristi",
       "gender": "female",
       "age": "25",
       "country": "India",
@@ -284,7 +244,7 @@
       ]
     },
     {
-      "id": 8,
+      "id": 5,
       "userName": "\uD83D\uDC44 \uD83D\uDC8B\uD83D\uDC69\uD83C\uDFFB\u200D\uD83E\uDDB0\uD83D\uDE18",
       "gender": "female",
       "age": "26",
@@ -350,155 +310,7 @@
     },
     {
       "id": 6,
-      "userName": "Soniya",
-      "gender": "female",
-      "age": "26",
-      "country": "India",
-      "content": [],
-      "users": "9200",
-      "answerRate": "100",
-      "userProfile": "https://bucket2266.blr1.cdn.digitaloceanspaces.com/FirebaseFolders/cute-desi-muslim-girl-ki-nude-photos/1.png",
-      "containsQuestion": false,
-      "recommendationType": "Nearby",
-      "userBotMsg": [
-        {
-          "id": 0,
-          "msg": "I don't know if we are suitable for eachother!",
-          "mimeType": "mimeType/text",
-          "extraMsg": "",
-          "dateTime": "",
-          "nextMsgDelay": 20000,
-          "read": 0,
-          "sent": 0
-        },
-        {
-          "id": 1,
-          "msg": "what do you think",
-          "mimeType": "mimeType/text",
-          "extraMsg": "",
-          "dateTime": "",
-          "nextMsgDelay": 20000,
-          "read": 0,
-          "sent": 0
-        },
-        {
-          "id": 2,
-          "msg": "hey why r u not replying\uD83E\uDDD0",
-          "mimeType": "mimeType/text",
-          "extraMsg": "",
-          "dateTime": "",
-          "nextMsgDelay": 20000,
-          "read": 0,
-          "sent": 0
-        }
-      ]
-    },
-    {
-      "id": 10,
-      "userName": "Avantika..",
-      "gender": "female",
-      "age": "23",
-      "country": "India",
-      "content": [],
-      "users": "510",
-      "answerRate": "75",
-      "userProfile": "https://bucket2266.blr1.cdn.digitaloceanspaces.com/ChatsProfileImages/avantika.png",
-      "containsQuestion": true,
-      "recommendationType": "Popular",
-      "userBotMsg": [],
-      "questionWithAns": {
-        "question": "Tumhari girlfriend hai kya?",
-        "dateTime": "",
-        "answers": [
-          "Haan",
-          "Nahi"
-        ],
-        "action": "chats_update_1.json",
-        "read": 0,
-        "sent": 0,
-        "reply": "",
-        "replyToUser": [
-          {
-            "id": 0,
-            "msg": "Main sundar hun zyada ya woh?",
-            "mimeType": "mimeType/text",
-            "extraMsg": "",
-            "dateTime": "",
-            "nextMsgDelay": 5000,
-            "read": 0,
-            "sent": 0
-          },
-          {
-            "id": 1,
-            "msg": "What are your hobbies?",
-            "mimeType": "mimeType/text",
-            "extraMsg": "",
-            "dateTime": "",
-            "nextMsgDelay": 15000,
-            "read": 0,
-            "sent": 0
-          },
-          {
-            "id": 1,
-            "msg": "Acha! Fir mujhse dosti karna chahoge?",
-            "mimeType": "mimeType/text",
-            "extraMsg": "",
-            "dateTime": "",
-            "nextMsgDelay": 15000,
-            "read": 0,
-            "sent": 0
-          }
-        ]
-      }
-    },
-    {
-      "id": 11,
-      "userName": "radhika",
-      "gender": "female",
-      "age": "27",
-      "country": "India",
-      "content": [],
-      "users": "2380",
-      "answerRate": "75",
-      "userProfile": "https://bucket2266.blr1.cdn.digitaloceanspaces.com/ChatsProfileImages/radhika.png",
-      "containsQuestion": false,
-      "recommendationType": "Nearby",
-      "userBotMsg": [
-        {
-          "id": 0,
-          "msg": "Hi",
-          "mimeType": "mimeType/text",
-          "extraMsg": "",
-          "dateTime": "",
-          "nextMsgDelay": 20000,
-          "read": 0,
-          "sent": 0
-        },
-        {
-          "id": 2,
-          "msg": "tumhara profile pic kaafi achi hai. ",
-          "mimeType": "mimeType/text",
-          "extraMsg": "",
-          "dateTime": "",
-          "nextMsgDelay": 5000,
-          "read": 0,
-          "sent": 0
-        },
-        {
-          "id": 3,
-          "msg": "khud ki hai tumhari?",
-          "mimeType": "mimeType/text",
-          "extraMsg": "",
-          "dateTime": "",
-          "nextMsgDelay": 5000,
-          "read": 0,
-          "sent": 0
-        }
-      ]
-    },
-    {
-      "id": 12,
-      "userName": "Neha",
+      "userName": "Prisha",
       "gender": "female",
       "age": "27",
       "country": "India",
@@ -562,8 +374,53 @@
       ]
     },
     {
-      "id": 13,
-      "userName": "Susmita Delhi ;)",
+      "id": 7,
+      "userName": "Akshara",
+      "gender": "female",
+      "age": "26",
+      "country": "India",
+      "content": [],
+      "users": "9200",
+      "answerRate": "100",
+      "userProfile": "https://bucket2266.blr1.cdn.digitaloceanspaces.com/FirebaseFolders/cute-desi-muslim-girl-ki-nude-photos/1.png",
+      "containsQuestion": false,
+      "recommendationType": "Nearby",
+      "userBotMsg": [
+        {
+          "id": 0,
+          "msg": "I don't know if we are suitable for eachother!",
+          "mimeType": "mimeType/text",
+          "extraMsg": "",
+          "dateTime": "",
+          "nextMsgDelay": 20000,
+          "read": 0,
+          "sent": 0
+        },
+        {
+          "id": 1,
+          "msg": "what do you think",
+          "mimeType": "mimeType/text",
+          "extraMsg": "",
+          "dateTime": "",
+          "nextMsgDelay": 20000,
+          "read": 0,
+          "sent": 0
+        },
+        {
+          "id": 2,
+          "msg": "hey why r u not replying\uD83E\uDDD0",
+          "mimeType": "mimeType/text",
+          "extraMsg": "",
+          "dateTime": "",
+          "nextMsgDelay": 20000,
+          "read": 0,
+          "sent": 0
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "userName": "Riya ;)",
       "gender": "female",
       "age": "19",
       "country": "India",
@@ -621,6 +478,119 @@
           "extraMsg": "",
           "dateTime": "",
           "nextMsgDelay": 30000,
+          "read": 0,
+          "sent": 0
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "userName": "Nisha..",
+      "gender": "female",
+      "age": "23",
+      "country": "India",
+      "content": [],
+      "users": "510",
+      "answerRate": "75",
+      "userProfile": "https://bucket2266.blr1.cdn.digitaloceanspaces.com/ChatsProfileImages/avantika.png",
+      "containsQuestion": true,
+      "recommendationType": "Popular",
+      "userBotMsg": [],
+      "questionWithAns": {
+        "question": "Tumhari girlfriend hai kya?",
+        "dateTime": "",
+        "answers": [
+          "Haan",
+          "Nahi"
+        ],
+        "action": "chats_update_1.json",
+        "read": 0,
+        "sent": 0,
+        "reply": "",
+        "replyToUser": [
+          {
+            "id": 0,
+            "msg": "Main sundar hun zyada ya woh?",
+            "mimeType": "mimeType/text",
+            "extraMsg": "",
+            "dateTime": "",
+            "nextMsgDelay": 5000,
+            "read": 0,
+            "sent": 0
+          },
+          {
+            "id": 1,
+            "msg": "What are your hobbies?",
+            "mimeType": "mimeType/text",
+            "extraMsg": "",
+            "dateTime": "",
+            "nextMsgDelay": 15000,
+            "read": 0,
+            "sent": 0
+          },
+          {
+            "id": 1,
+            "msg": "Acha! Fir mujhse dosti karna chahoge?",
+            "mimeType": "mimeType/text",
+            "extraMsg": "",
+            "dateTime": "",
+            "nextMsgDelay": 15000,
+            "read": 0,
+            "sent": 0
+          }
+        ]
+      }
+    },
+    {
+      "id": 10,
+      "userName": "Kashish",
+      "gender": "female",
+      "age": "24",
+      "country": "India",
+      "content": [],
+      "users": "4210",
+      "answerRate": "100",
+      "userProfile": "https://bucket2266.blr1.cdn.digitaloceanspaces.com/ChatsProfileImages/mishika%20delhi.png",
+      "containsQuestion": false,
+      "recommendationType": "Nearby",
+      "userBotMsg": [
+        {
+          "id": 0,
+          "msg": "Hi",
+          "mimeType": "mimeType/text",
+          "extraMsg": "",
+          "dateTime": "",
+          "nextMsgDelay": 10000,
+          "read": 0,
+          "sent": 0
+        },
+        {
+          "id": 1,
+          "msg": "Mujhe dance ka bahut shauk hai",
+          "mimeType": "mimeType/text",
+          "extraMsg": "",
+          "dateTime": "",
+          "nextMsgDelay": 20000,
+          "read": 0,
+          "sent": 0
+        },
+        {
+          "id": 2,
+          "msg": "Tumhare hobbies kya hai?",
+          "mimeType": "mimeType/text",
+          "extraMsg": "",
+          "dateTime": "",
+          "nextMsgDelay": 30000,
+          "read": 0,
+          "sent": 0
+        },
+        {
+          "id": 3,
+          "msg": "Kuch toh bolo...",
+          "mimeType": "mimeType/text",
+          "extraMsg": "",
+          "dateTime": "",
+          "nextMsgDelay": 40000,
           "read": 0,
           "sent": 0
         }
