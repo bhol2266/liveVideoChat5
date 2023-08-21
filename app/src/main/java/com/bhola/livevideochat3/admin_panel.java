@@ -2,6 +2,7 @@ package com.bhola.livevideochat3;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -13,18 +14,27 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class admin_panel extends AppCompatActivity {
     public static int counter = 0;
 
     DatabaseReference mref, notificationMref;  TextView Users_Counters;
-    Button   Refer_App_url_BTN, STory_Switch_Active_BTN;
+    Button   Refer_App_url_BTN, databaseBtn;
     Switch switch_Exit_Nav, switch_Activate_Ads, switch_App_Updating;
     Button Ad_Network;
     static String uncensored_title = "";
@@ -53,6 +63,7 @@ public class admin_panel extends AppCompatActivity {
         switch_App_Updating = findViewById(R.id.App_updating_Switch);
         switch_Exit_Nav = findViewById(R.id.switch_Exit_Nav);
         Refer_App_url_BTN = findViewById(R.id.Refer_App_url_BTN);
+        databaseBtn = findViewById(R.id.databaseBtn);
 
 
     }
@@ -87,9 +98,9 @@ public class admin_panel extends AppCompatActivity {
 
     private void appControl() {
         checkButtonState();
-        EditText Refer_App_url2;
 
-        Refer_App_url2 = findViewById(R.id.Refer_App_url2);
+
+        EditText  Refer_App_url2 = findViewById(R.id.Refer_App_url2);
         Refer_App_url_BTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,6 +108,22 @@ public class admin_panel extends AppCompatActivity {
                 if (Refer_App_url2.length() > 2) {
                     mref.child("Refer_App_url2").setValue(Refer_App_url2.getText().toString());
                     Toast.makeText(admin_panel.this, "Refer_App_url2 ADDED", Toast.LENGTH_SHORT).show();
+                } else
+                    Toast.makeText(admin_panel.this, "Field is Empty", Toast.LENGTH_SHORT).show();
+            }
+
+        });
+
+
+
+        EditText  databaseEdittext = findViewById(R.id.databaseEdittext);
+        databaseBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (databaseEdittext.length() > 2) {
+                    mref.child("databaseURL").setValue(databaseEdittext.getText().toString());
+                    Toast.makeText(admin_panel.this, "Databaseurl ADDED", Toast.LENGTH_SHORT).show();
                 } else
                     Toast.makeText(admin_panel.this, "Field is Empty", Toast.LENGTH_SHORT).show();
             }

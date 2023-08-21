@@ -1,5 +1,6 @@
 package com.bhola.livevideochat3;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -64,11 +65,13 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.google.common.reflect.TypeToken;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -76,6 +79,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -336,7 +340,8 @@ public class CameraActivity extends AppCompatActivity {
             Girl girl = new Girl();
             girl.setName("Amrita Desai");
             girl.setAge(25);
-            girl.setVideoUrl("https://bucket2266.blr1.cdn.digitaloceanspaces.com/Amrita%20Desai.mp4");
+
+            girl.setVideoUrl(SplashScreen.databaseURL+"DesiChatVideos/Amrita%20Desai.mp4");
             girl.setCensored(true);
             girl.setSeen(false);
             girl.setLiked(false);
@@ -372,7 +377,7 @@ public class CameraActivity extends AppCompatActivity {
             }
         });
 
-        String baseUrl = "https://bucket2266.blr1.cdn.digitaloceanspaces.com/";
+        String baseUrl =SplashScreen.databaseURL+"DesiChatVideos/";
         String videoPath = baseUrl + girlsList.get(currentVideoIndex).getName() + ".mp4";
 
 
@@ -469,7 +474,7 @@ public class CameraActivity extends AppCompatActivity {
                     progressBarLayout.setVisibility(View.VISIBLE);
                     controlsLayout.setVisibility(View.GONE);
                     tapToReplyView.setVisibility(View.VISIBLE);
-                    String baseUrl = "https://bucket2266.blr1.cdn.digitaloceanspaces.com/";
+                    String baseUrl = SplashScreen.databaseURL+"DesiChatVideos/";
                     String videoPath = baseUrl + girlsList.get(currentVideoIndex).getName() + ".mp4";// Replace with your actual video URL
 
 
