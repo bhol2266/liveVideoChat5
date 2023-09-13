@@ -204,7 +204,7 @@ public class SplashScreen extends AppCompatActivity {
                     Ad_Network_Name = (String) snapshot.child("Ad_Network").getValue();
                     App_updating = (String) snapshot.child("App_updating").getValue();
                     Notification_ImageURL = (String) snapshot.child("Notification_ImageURL").getValue();
-//                    databaseURL = (String) snapshot.child("databaseURL").getValue();
+                    databaseURL = (String) snapshot.child("databaseURL").getValue();
 
 
                     if (animationCompleted) {
