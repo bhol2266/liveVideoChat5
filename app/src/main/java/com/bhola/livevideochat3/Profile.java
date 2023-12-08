@@ -1,9 +1,6 @@
 package com.bhola.livevideochat3;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.RenderEffect;
@@ -12,6 +9,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.InsetDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -21,6 +19,10 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.squareup.picasso.Picasso;
@@ -36,12 +38,13 @@ public class Profile extends AppCompatActivity {
     AlertDialog report_user_dialog = null;
     AlertDialog report_userSucessfully_dialog = null;
     GridLayout gridLayout;
+    public static TextView send;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (SplashScreen.Ads_State.equals("active")) {
+        if (MyApplication.Ads_State.equals("active")) {
 //            showAds();
         }
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -139,7 +142,7 @@ public class Profile extends AppCompatActivity {
 
     private void blockUserDialog() {
 
-        final androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(Profile.this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(Profile.this);
         LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
         View promptView = inflater.inflate(R.layout.dialog_block_user, null);
         builder.setView(promptView);
@@ -176,7 +179,7 @@ public class Profile extends AppCompatActivity {
 
     private void reportUserDialog() {
 
-        final androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(Profile.this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(Profile.this);
         LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
         View promptView = inflater.inflate(R.layout.dialog_report_user, null);
         builder.setView(promptView);
@@ -214,7 +217,7 @@ public class Profile extends AppCompatActivity {
 
     private void reportUserSucessfullDialog() {
 
-        final androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(Profile.this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(Profile.this);
         LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
         View promptView = inflater.inflate(R.layout.dialog_report_user_sucessfull, null);
         builder.setView(promptView);
@@ -318,7 +321,7 @@ public class Profile extends AppCompatActivity {
 
             Picasso.get().load(imageList.get(i).get("url")).into(imageView);
 
-            if (SplashScreen.coins == 0) {
+            if (MyApplication.coins == 0) {
 
                 if (imageList.get(i).get("type").equals("premium")) {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
@@ -341,10 +344,20 @@ public class Profile extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
 
-//                    Dialog dialog=new Dialog(this,andr)
+                    DisplayMetrics displayMetrics = new DisplayMetrics();
+                    getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+                    int originalScreenWidth = displayMetrics.widthPixels;
+                    int screenHeight = displayMetrics.heightPixels;
 
-                    ImageViewerDialog dialog = new ImageViewerDialog(Profile.this, imageList, finalI);
-                    dialog.show();
+
+                    // Decrease the screen width by 15%
+                    int screenWidth = (int) (originalScreenWidth * 0.85);
+                    Fragment_LargePhotoViewer fragment = Fragment_LargePhotoViewer.newInstance(Profile.this, (ArrayList<Map<String, String>>) imageList, finalI, screenWidth, screenHeight);
+
+                    FragmentManager fragmentManager = getFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment) // Replace with your container ID
+                            .addToBackStack(null) // Optional, for back navigation
+                            .commit();
                 }
             });
 
@@ -382,7 +395,7 @@ public class Profile extends AppCompatActivity {
     }
 
     private void showAds() {
-        if (SplashScreen.Ad_Network_Name.equals("admob")) {
+        if (MyApplication.Ad_Network_Name.equals("admob")) {
             ADS_ADMOB.Interstitial_Ad(this);
         } else {
             com.facebook.ads.InterstitialAd facebook_IntertitialAds = null;

@@ -9,7 +9,6 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,11 +18,9 @@ import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.VideoView;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import com.airbnb.lottie.LottieAnimationView;
 
@@ -94,7 +91,7 @@ public class Fragment_Calling extends Fragment {
             public void run() {
                 endcall.performClick();
             }
-        }, 10000);
+        }, 15000);
     }
 
     private void init() {
@@ -126,7 +123,10 @@ public class Fragment_Calling extends Fragment {
         });
 
         VideoView videoView = view.findViewById(R.id.videoView);
-        String videoPath = SplashScreen.databaseURL+"DesiChatVideos/" + name + ".mp4";
+        String videoPath = MyApplication.databaseURL_video + "DesiChatVideos/" + name + ".mp4";
+
+        Log.d("sdafsda", "videoPath: "+videoPath);
+
         Uri videoUri = Uri.parse(videoPath);
         videoView.setVideoURI(videoUri);
         videoView.setBackgroundColor(getResources().getColor(R.color.color_333333));

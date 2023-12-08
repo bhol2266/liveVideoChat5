@@ -4,21 +4,49 @@
     android:layout_height="match_parent">
 
 
-    <ImageView
+    <ProgressBar
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:indeterminateTint="@color/themeColor"/>
+
+    <com.github.chrisbanes.photoview.PhotoView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
         android:adjustViewBounds="true"
         android:src="@drawable/app_icon" />
 
-    <ImageView
+
+
+    <LinearLayout
         android:id="@+id/lock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:visibility="gone"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
         android:layout_gravity="center"
-        android:alpha="0.7"
-        android:src="@drawable/lock" />
+        android:gravity="center"
+        android:orientation="horizontal"
+        >
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/crown"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:textSize="30dp"
+            android:textColor="@color/white"
+            android:text="Visible to VIP"
+            />
+
+    </LinearLayout>
+
+
+
+
 
 </FrameLayout>

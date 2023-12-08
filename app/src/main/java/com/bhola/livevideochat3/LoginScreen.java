@@ -1,5 +1,23 @@
 package com.bhola.livevideochat3;
 
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Paint;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Build;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,41 +25,34 @@ import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.core.view.WindowInsetsControllerCompat;
 
-import android.app.ProgressDialog;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.drawable.ColorDrawable;
-import android.os.Build;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.WindowManager;
-import android.widget.LinearLayout;
-import android.widget.RadioGroup;
-import android.widget.TextView;
-import android.widget.Toast;
-
+import com.bhola.livevideochat3.Models.GalleryModel;
+import com.bhola.livevideochat3.Models.UserModel;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.gson.Gson;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import javax.net.ssl.HttpsURLConnection;
 
 public class LoginScreen extends AppCompatActivity {
 
@@ -85,64 +96,11 @@ public class LoginScreen extends AppCompatActivity {
         loginGuest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openGuestLoginDialog();
+                LoginInComplete("Guest", "Guest", "", "");
             }
         });
     }
 
-    private void openGuestLoginDialog() {
-
-        TextInputEditText editTextName, editTextAge;
-        RadioGroup radioGroupGender;
-        TextView buttonSubmit;
-
-        final androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(LoginScreen.this);
-        LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
-        View promptView = inflater.inflate(R.layout.dialog_guestlogin, null);
-        builder.setView(promptView);
-        builder.setCancelable(true);
-
-        editTextName = promptView.findViewById(R.id.editTextName);
-        editTextAge = promptView.findViewById(R.id.editTextAge);
-        radioGroupGender = promptView.findViewById(R.id.radioGroupGender);
-        buttonSubmit = promptView.findViewById(R.id.buttonSubmit);
-
-        buttonSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String name = editTextName.getText().toString();
-                String age = editTextAge.getText().toString();
-                String gender = "Male";
-
-//                int selectedId = radioGroupGender.getCheckedRadioButtonId();
-//                if (selectedId != -1) {
-//                    RadioButton radioButton = findViewById(selectedId);
-//                    gender = radioButton.getText().toString();
-//                }
-
-                // Display the submitted information
-                if (name.length() == 0 || age.length() == 0 || gender.length() == 0) {
-                    Toast.makeText(LoginScreen.this, "Enter details", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                SharedPreferences sh = getSharedPreferences("UserInfo", MODE_PRIVATE);
-                SharedPreferences.Editor editor = sh.edit();
-                editor.putString("name", name);
-                editor.putString("age", age);
-                editor.putString("gender", gender);
-                editor.putString("loginAs", "Guest");
-                editor.apply();
-                LoginInComplete("Guest");
-            }
-        });
-
-
-        dialog = builder.create();
-        dialog.show();
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
-
-    }
 
     private void addUnderlineTerms_privacy() {
         TextView terms = findViewById(R.id.terms);
@@ -153,13 +111,13 @@ public class LoginScreen extends AppCompatActivity {
         terms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(LoginScreen.this,Terms_Conditions.class));
+                startActivity(new Intent(LoginScreen.this, Terms_Conditions.class));
             }
         });
         privaciy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(LoginScreen.this,PrivacyPolicy.class));
+                startActivity(new Intent(LoginScreen.this, PrivacyPolicy.class));
 
             }
         });
@@ -208,18 +166,12 @@ public class LoginScreen extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            progressDialog.cancel();
+                            if (progressDialog != null && progressDialog.isShowing()) {
+                                //Crashlytics error
+                                progressDialog.cancel();
+                            }
                             ArrayList<String> keyword = new ArrayList<>();
-                            saveUserdataFireStore(account.getDisplayName(), account.getEmail(), account.getPhotoUrl().toString(), false);
-
-                            SharedPreferences sh = getSharedPreferences("UserInfo", MODE_PRIVATE);
-                            SharedPreferences.Editor editor = sh.edit();
-                            editor.putString("name", account.getDisplayName());
-                            editor.putString("email", account.getEmail());
-                            editor.putString("photoUrl", account.getPhotoUrl().toString());
-                            editor.putString("loginAs", "Google");
-                            editor.apply();
-                            LoginInComplete("Google");
+                            checkUserExist(account.getEmail(), account.getDisplayName(), account.getPhotoUrl().toString());
 
                         } else {
                             Toast.makeText(LoginScreen.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
@@ -227,103 +179,211 @@ public class LoginScreen extends AppCompatActivity {
                     }
                 });
             } catch (ApiException e) {
-                Log.d(SplashScreen.TAG, "onActivityResult: " + e.getMessage());
+                Log.d(MyApplication.TAG, "onActivityResulttt: " + e.getMessage());
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
 
+    private void checkUserExist(String email, String displayName, String picUrl) {
+        showLoadingDialog();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        CollectionReference usersRef = db.collection("Users");
 
-    private void saveUserdataFireStore(String displayName, String email, String profileUrl, boolean membership) {
-        firebaseFirestore.collection("Users").document(FirebaseAuth.getInstance().getCurrentUser().getEmail()).set(new UserModel(displayName, email, profileUrl, membership, new java.util.Date(), "not set")).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void unused) {
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(LoginScreen.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+// Create a query to find the user with your email
+        Query query = usersRef.whereEqualTo("email", email);
+
+
+        query.get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    if (queryDocumentSnapshots.isEmpty()) {
+                        // No user with the provided email address found and countinue to new login
+                        LoginInComplete("Google", displayName, email, picUrl);
+
+
+                    } else {
+
+
+                        for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                            MyApplication.userModel = documentSnapshot.toObject(UserModel.class); // Replace User with your actual user model class
+                            Utils utils = new Utils();
+                            utils.updateDateonFireStore("date", new Date());
+
+                            // Use the user data as needed
+                            MyApplication.userLoggedIn = true;
+                            MyApplication.userLoggedIAs = MyApplication.userModel.getLoggedAs();
+
+                            Toast.makeText(this, "Welcome Back!", Toast.LENGTH_SHORT).show();
+
+                            SharedPreferences sharedPreferences = getSharedPreferences("UserInfo", MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+
+
+                            editor.putString("email", email);
+                            editor.putString("photoUrl", MyApplication.userModel.getProfilepic());
+                            editor.putString("loginAs", MyApplication.userModel.getLoggedAs());
+                            editor.putString("Bio", MyApplication.userModel.getBio());
+                            editor.putString("Language", MyApplication.userModel.getLanguage());
+
+                            editor.putString("nickName", MyApplication.userModel.getFullname());
+                            editor.putString("Gender", MyApplication.userModel.getSelectedGender());
+                            editor.putString("Birthday", MyApplication.userModel.getBirthday());
+                            editor.putInt("userId", MyApplication.userModel.getUserId());
+                            editor.putInt("coins", MyApplication.userModel.getCoins());
+                            editor.apply();
+
+                            Utils.replaceFCMToken();
+
+
+                            dismissLoadingDialog();
+                            Log.d("sdafsdaf", "checkUserExist: "+MyApplication.userModel.getUserId());
+                            if (MyApplication.userModel.getGalleryImages().size() > 1) {
+                                saveGalleryImages(MyApplication.userModel.getGalleryImages()); // save gallery images to local storeage from firebase storage
+                            } else {
+                                startActivity(new Intent(LoginScreen.this, MainActivity.class));
+                            }
+
+                        }
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    // Handle any errors that might occur during the query
+                });
+
+
     }
 
 
-    private void LoginInComplete(String loggedAs) {
-        SplashScreen.userLoggedIn = true;
-        SplashScreen.userLoggedIAs = loggedAs;
-        Toast.makeText(this, "Logged In!", Toast.LENGTH_SHORT).show();
+    private void saveGalleryImages(final ArrayList<GalleryModel> galleryImages) {
+
+        DownloadImageTask downloadImageTask = new DownloadImageTask(LoginScreen.this);
+        downloadImageTask.execute(galleryImages);
+
+    }
+
+    public static void saveGalleryImagesToSharedPreferences(Context context) {
+        // This method is called when all images are downloaded.
+        SharedPreferences sharedPreferences = context.getSharedPreferences("UserInfo", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        List<GalleryModel> itemList = new ArrayList<>();
+        itemList.addAll(MyApplication.userModel.getGalleryImages());
+
+        Gson gson = new Gson();
+        String json = gson.toJson(itemList);
+        editor.putString("galleryImages", json);
+
+        editor.apply(); // Make sure to apply the changes.
+    }
+
+
+    private void showLoadingDialog() {
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Fetching details...");
+        progressDialog.setIndeterminate(true);
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+    }
+
+    private void dismissLoadingDialog() {
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.dismiss();
+        }
+    }
+
+
+    private void LoginInComplete(String loggedAs, String displayName, String email, String photoUrl) {
+        //new login
+        MyApplication.userLoggedIn = true;
+        Log.d("dasfsadf", "LoginInComplete: " + loggedAs);
+        MyApplication.userLoggedIAs = loggedAs;
         finish();
-        Intent intent = new Intent(LoginScreen.this, MainActivity.class);
+        Intent intent = new Intent(LoginScreen.this, Fill_details.class);
+        intent.putExtra("loggedAs", loggedAs);
+        intent.putExtra("nickName", displayName);
+        intent.putExtra("email", email);
+        intent.putExtra("photoUrl", photoUrl);
         startActivity(intent);
     }
 
 
 }
 
-class UserModel {
 
-    String fullname, email, profilepic;
-    boolean membership;
-    Date date;
-    String memberShipExpiryDate;
+class DownloadImageTask extends AsyncTask<ArrayList<GalleryModel>, Void, Void> {
 
-    public UserModel(String fullname, String email, String profilepic, boolean membership, Date date, String memberShipExpiryDate) {
-        this.fullname = fullname;
-        this.email = email;
-        this.profilepic = profilepic;
-        this.membership = membership;
-        this.date = date;
-        this.memberShipExpiryDate = memberShipExpiryDate;
+    private ProgressDialog progressBarDialog;
+    private final Context context;
+
+    public DownloadImageTask(Context context) {
+        this.context = context;
     }
 
-    public UserModel() {
+    @Override
+    protected Void doInBackground(ArrayList<GalleryModel>... arrayLists) {
+
+        ArrayList<GalleryModel> imageList = arrayLists[0];
+
+        for (int i = 1; i < imageList.size(); i++) {
+            GalleryModel galleryModel = imageList.get(i);
+            try {
+                URL url = new URL(galleryModel.getDownloadUrl());
+                HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
+                connection.setDoInput(true);
+                connection.connect();
+
+                InputStream inputStream = connection.getInputStream();
+                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+
+                File internalStorage = new File(context.getFilesDir(), "images");
+
+                if (!internalStorage.exists()) {
+                    internalStorage.mkdir();
+                }
+                File file = new File(internalStorage, galleryModel.getImageFileNAme());
+                Uri imageURI = Uri.fromFile(file);
+                MyApplication.userModel.getGalleryImages().get(i).setImage_uri(String.valueOf(imageURI));
+
+                if (file.exists()) file.delete();
+
+                FileOutputStream outputStream = new FileOutputStream(file);
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+                outputStream.flush();
+                outputStream.close();
+
+            } catch (Exception e) {
+                Log.d("TAGA", "doInBackground: " + e.getMessage());
+            }
+        }
+
+
+        return null;
     }
 
-    public String getFullname() {
-        return fullname;
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+        progressBarDialog = new ProgressDialog(context);
+        progressBarDialog.setMessage("Downloading user images...");
+        progressBarDialog.setCancelable(false);
+        progressBarDialog.show();
+
     }
 
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
+    @Override
+    protected void onPostExecute(Void unused) {
+        super.onPostExecute(unused);
+        progressBarDialog.dismiss();
+        LoginScreen.saveGalleryImagesToSharedPreferences(context);
+        context.startActivity(new Intent(context, MainActivity.class));
+
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getProfilepic() {
-        return profilepic;
-    }
-
-    public void setProfilepic(String profilepic) {
-        this.profilepic = profilepic;
-    }
-
-    public boolean isMembership() {
-        return membership;
-    }
-
-    public void setMembership(boolean membership) {
-        this.membership = membership;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public String getMemberShipExpiryDate() {
-        return memberShipExpiryDate;
-    }
-
-    public void setMemberShipExpiryDate(String memberShipExpiryDate) {
-        this.memberShipExpiryDate = memberShipExpiryDate;
+    @Override
+    protected void onProgressUpdate(Void... values) {
+        super.onProgressUpdate(values);
     }
 }
+
+
+

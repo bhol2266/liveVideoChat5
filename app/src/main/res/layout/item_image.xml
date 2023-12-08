@@ -5,12 +5,32 @@
     app:cardCornerRadius="10dp"
     android:layout_margin="8dp">
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/lock"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:textColor="@color/white"
+            android:textSize="10dp"
+            android:text="Visible to VIP"
+            android:layout_gravity="center"
+            />
+
+    </FrameLayout>
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop" />
+
+
+
 
 </androidx.cardview.widget.CardView>
 

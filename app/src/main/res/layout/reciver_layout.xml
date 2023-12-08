@@ -12,7 +12,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="8dp"
-        android:src="@drawable/d" />
+        android:src="@drawable/customer_care" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -25,9 +25,9 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/reciver_shape"
             android:layout_gravity="left"
             android:layout_marginStart="1dp"
+            android:background="@drawable/reciver_shape"
             android:orientation="vertical"
             android:padding="7dp">
 
@@ -40,19 +40,18 @@
                 android:textColor="@color/gmts_light_gray"
                 android:textColorLink="@color/themeColor"
                 android:textSize="15dp" />
-
             <TextView
                 android:id="@+id/submitFeedback"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
+                android:fontFamily="@font/inter"
                 android:paddingTop="2dp"
                 android:paddingBottom="2dp"
-                android:visibility="gone"
-                android:fontFamily="@font/inter"
                 android:text="please click here to submit feedback."
                 android:textColor="@color/themeColor"
-                android:textSize="15dp" />
+                android:textSize="15dp"
+                android:visibility="gone" />
         </LinearLayout>
 
 

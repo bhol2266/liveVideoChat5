@@ -9,11 +9,13 @@ public class UserBotMsg {
     private int nextMsgDelay;
     private int read;
     private int sent;
+    private String messageType;
+    private int viewType;
 
     public UserBotMsg() {
     }
 
-    public UserBotMsg(int id, String msg, String mimeType, String extraMsg, String dateTime, int nextMsgDelay, int read, int sent) {
+    public UserBotMsg(int id, String msg, String mimeType, String extraMsg, String dateTime, int nextMsgDelay, int read, int sent, String messageType, int viewType) {
         this.id = id;
         this.msg = msg;
         this.mimeType = mimeType;
@@ -22,6 +24,8 @@ public class UserBotMsg {
         this.nextMsgDelay = nextMsgDelay;
         this.read = read;
         this.sent = sent;
+        this.messageType = messageType;
+        this.viewType = viewType;
     }
 
     public int getId() {
@@ -86,5 +90,21 @@ public class UserBotMsg {
 
     public void setSent(int sent) {
         this.sent = sent;
+    }
+
+    public String getMessageType() {
+        return messageType;
+    }
+
+    public void setMessageType(String messageType) {
+        this.messageType = messageType;
+    }
+
+    public int getViewType() {
+        return viewType;
+    }
+
+    public void setViewType(int viewType) {
+        this.viewType = viewType;
     }
 }

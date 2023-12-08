@@ -1,8 +1,8 @@
 package com.bhola.livevideochat3;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -14,27 +14,19 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.Timestamp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 public class admin_panel extends AppCompatActivity {
     public static int counter = 0;
 
-    DatabaseReference mref, notificationMref;  TextView Users_Counters;
-    Button   Refer_App_url_BTN, databaseBtn;
+    DatabaseReference mref, notificationMref;
+    TextView Users_Counters;
+    Button Refer_App_url_BTN, databaseBtn;
     Switch switch_Exit_Nav, switch_Activate_Ads, switch_App_Updating;
     Button Ad_Network;
     static String uncensored_title = "";
@@ -50,6 +42,11 @@ public class admin_panel extends AppCompatActivity {
         initViews();
         appControl();
         Ad_Network_Selection();
+
+        Button GotoUserlist = findViewById(R.id.GotoUserlist);
+        GotoUserlist.setOnClickListener(view -> {
+            startActivity(new Intent(admin_panel.this, AdminPanel_Userlist.class));
+        });
 
     }
 
@@ -92,15 +89,11 @@ public class admin_panel extends AppCompatActivity {
     }
 
 
-
-
-
-
     private void appControl() {
         checkButtonState();
 
 
-        EditText  Refer_App_url2 = findViewById(R.id.Refer_App_url2);
+        EditText Refer_App_url2 = findViewById(R.id.Refer_App_url2);
         Refer_App_url_BTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,8 +108,7 @@ public class admin_panel extends AppCompatActivity {
         });
 
 
-
-        EditText  databaseEdittext = findViewById(R.id.databaseEdittext);
+        EditText databaseEdittext = findViewById(R.id.databaseEdittext);
         databaseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -183,28 +175,13 @@ public class admin_panel extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String match = (String) snapshot.child("switch_Exit_Nav").getValue().toString().trim();
 
-                if (match.equals("active")) {
-                    switch_Exit_Nav.setChecked(true);
-
-                } else {
-
-                    switch_Exit_Nav.setChecked(false);
-                }
+                switch_Exit_Nav.setChecked(match.equals("active"));
 
                 String Ads = (String) snapshot.child("Ads").getValue().toString().trim();
 
-                if (Ads.equals("active")) {
-                    switch_Activate_Ads.setChecked(true);
+                switch_Activate_Ads.setChecked(Ads.equals("active"));
 
-                } else {
-                    switch_Activate_Ads.setChecked(false);
-                }
-
-                if (snapshot.child("App_updating").getValue().toString().trim().equals("active")) {
-                    switch_App_Updating.setChecked(true);
-                } else {
-                    switch_App_Updating.setChecked(false);
-                }
+                switch_App_Updating.setChecked(snapshot.child("App_updating").getValue().toString().trim().equals("active"));
 
                 String Ad_Network_name = (String) snapshot.child("Ad_Network").getValue().toString().trim();
 

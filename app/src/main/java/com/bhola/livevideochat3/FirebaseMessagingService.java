@@ -47,7 +47,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         builder.setSmallIcon(R.drawable.app_icon);
 
         try {
-            URL url = new URL(SplashScreen.Notification_ImageURL);
+            URL url = new URL(MyApplication.Notification_ImageURL);
             Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
             builder.setLargeIcon(bitmap);
 

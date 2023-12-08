@@ -1,6 +1,5 @@
 package com.bhola.livevideochat3;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -51,7 +50,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -65,13 +63,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.airbnb.lottie.LottieAnimationView;
-import com.google.common.reflect.TypeToken;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -79,7 +70,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Type;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -137,13 +128,13 @@ public class CameraActivity extends AppCompatActivity {
         }
     };
     String currentCameraSide = "Front";
-    private String TAG = "activity_camera";
+    private final String TAG = "activity_camera";
     public static ArrayList<Girl> girlsList;
-    androidx.appcompat.app.AlertDialog disclaimer_dialog = null;
+    AlertDialog disclaimer_dialog = null;
     private CountDownTimer countDownTimer;
 
-    androidx.appcompat.app.AlertDialog block_user_dialog = null;
-    androidx.appcompat.app.AlertDialog report_user_dialog = null;
+    AlertDialog block_user_dialog = null;
+    AlertDialog report_user_dialog = null;
     AlertDialog report_userSucessfully_dialog = null;
     Handler callhandler;
     Runnable callRunnable;
@@ -157,7 +148,7 @@ public class CameraActivity extends AppCompatActivity {
         setContentView(R.layout.activity_camera);
 //       fullscreenMode();
 
-        if (SplashScreen.Ads_State.equals("active")) {
+        if (MyApplication.Ads_State.equals("active")) {
             showAds();
         }
         actionbar();
@@ -240,7 +231,7 @@ public class CameraActivity extends AppCompatActivity {
     }
 
     private void getCall() {
-        if (SplashScreen.App_updating.equals("active")) {
+        if (MyApplication.App_updating.equals("active")) {
             return;
         }
         int index = currentVideoIndex;
@@ -336,12 +327,12 @@ public class CameraActivity extends AppCompatActivity {
 
 
         girlsList = new ArrayList<>();
-        if (SplashScreen.App_updating.equals("active")) {
+        if (MyApplication.App_updating.equals("active")) {
             Girl girl = new Girl();
             girl.setName("Amrita Desai");
             girl.setAge(25);
 
-            girl.setVideoUrl(SplashScreen.databaseURL+"DesiChatVideos/Amrita%20Desai.mp4");
+            girl.setVideoUrl(MyApplication.databaseURL_video + "DesiChatVideos/Amrita%20Desai.mp4");
             girl.setCensored(true);
             girl.setSeen(false);
             girl.setLiked(false);
@@ -353,6 +344,62 @@ public class CameraActivity extends AppCompatActivity {
             readGirlsVideo();  // json file
         }
 
+    }
+
+    private void setTimer() {
+        TextView counterText = findViewById(R.id.counterText);
+        TextView counterTextCircular = findViewById(R.id.counterTextCircular);
+
+        // Set the initial value of the timer in seconds
+        int initialSeconds = 15;
+
+        // Set up the CountDownTimer
+        countDownTimer = new CountDownTimer(initialSeconds * 1000, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                // Update the timerTextView with the remaining seconds
+                int seconds = (int) (millisUntilFinished / 1000);
+                counterText.setText("Your dream girl will be gone in " + seconds + " seconds");
+                counterTextCircular.setText(String.valueOf(seconds));
+
+                if (seconds == 0 && currentVideoIndex < girlsList.size()) {
+
+                    if (MyApplication.App_updating.equals("active")) {
+                        onBackPressed();
+                        return;
+                    }
+
+                    currentVideoIndex = currentVideoIndex + 1;
+                    videoView.stopPlayback();
+                    progressBarLayout.setVisibility(View.VISIBLE);
+                    controlsLayout.setVisibility(View.GONE);
+                    tapToReplyView.setVisibility(View.VISIBLE);
+                    String baseUrl = MyApplication.databaseURL_video + "DesiChatVideos/";
+                    String videoPath = baseUrl + girlsList.get(currentVideoIndex).getName() + ".mp4";// Replace with your actual video URL
+
+
+                    Uri videoUri = Uri.parse(videoPath);
+                    videoView.setVideoURI(videoUri);
+                    // Start playing the new video
+                    videoView.start();
+                    countDownTimer.cancel();
+                }
+                if (currentVideoIndex == girlsList.size() - 1) {
+                    for (Girl girll : girlsList) {
+                        girll.setLiked(false);
+                    }
+                    currentVideoIndex = 0;
+                }
+            }
+
+            @Override
+            public void onFinish() {
+                // Timer has finished, update the UI or perform necessary actions
+            }
+        };
+
+        // Start the timer
+        countDownTimer.start();
     }
 
     private void playVideoinBackground() {
@@ -377,13 +424,13 @@ public class CameraActivity extends AppCompatActivity {
             }
         });
 
-        String baseUrl =SplashScreen.databaseURL+"DesiChatVideos/";
+        String baseUrl = MyApplication.databaseURL_video + "DesiChatVideos/";
         String videoPath = baseUrl + girlsList.get(currentVideoIndex).getName() + ".mp4";
 
 
-        Log.d(SplashScreen.TAG, "loadDataArraylist: " + girlsList.get(0).getName());
-        Log.d(SplashScreen.TAG, "currentVideoIndex: " + currentVideoIndex);
-        Log.d(SplashScreen.TAG, "videoPath: " + videoPath);
+        Log.d(MyApplication.TAG, "loadDataArraylist: " + girlsList.get(0).getName());
+        Log.d(MyApplication.TAG, "currentVideoIndex: " + currentVideoIndex);
+        Log.d(MyApplication.TAG, "videoPath: " + videoPath);
 
 
         Uri videoUri = Uri.parse(videoPath);
@@ -446,63 +493,6 @@ public class CameraActivity extends AppCompatActivity {
     }
 
 
-    private void setTimer() {
-        TextView counterText = findViewById(R.id.counterText);
-        TextView counterTextCircular = findViewById(R.id.counterTextCircular);
-
-        // Set the initial value of the timer in seconds
-        int initialSeconds = 15;
-
-        // Set up the CountDownTimer
-        countDownTimer = new CountDownTimer(initialSeconds * 1000, 1000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                // Update the timerTextView with the remaining seconds
-                int seconds = (int) (millisUntilFinished / 1000);
-                counterText.setText("Your dream girl will be gone in " + String.valueOf(seconds) + " seconds");
-                counterTextCircular.setText(String.valueOf(seconds));
-
-                if (seconds == 0 && currentVideoIndex < girlsList.size()) {
-
-                    if (SplashScreen.App_updating.equals("active")) {
-                        onBackPressed();
-                        return;
-                    }
-
-                    currentVideoIndex = currentVideoIndex + 1;
-                    videoView.stopPlayback();
-                    progressBarLayout.setVisibility(View.VISIBLE);
-                    controlsLayout.setVisibility(View.GONE);
-                    tapToReplyView.setVisibility(View.VISIBLE);
-                    String baseUrl = SplashScreen.databaseURL+"DesiChatVideos/";
-                    String videoPath = baseUrl + girlsList.get(currentVideoIndex).getName() + ".mp4";// Replace with your actual video URL
-
-
-                    Uri videoUri = Uri.parse(videoPath);
-                    videoView.setVideoURI(videoUri);
-                    // Start playing the new video
-                    videoView.start();
-                    countDownTimer.cancel();
-                }
-                if (currentVideoIndex == girlsList.size() - 1) {
-                    for (Girl girll : girlsList) {
-                        girll.setLiked(false);
-                    }
-                    currentVideoIndex = 0;
-                }
-            }
-
-            @Override
-            public void onFinish() {
-                // Timer has finished, update the UI or perform necessary actions
-            }
-        };
-
-        // Start the timer
-        countDownTimer.start();
-    }
-
-
     private void readGirlsVideo() {
 
 //         Read and parse the JSON file
@@ -524,68 +514,23 @@ public class CameraActivity extends AppCompatActivity {
                 girl.setLiked(girlObject.getBoolean("liked"));
 
                 // Add the Girl object to the ArrayList
-                girlsList.add(girl);
+                if (MyApplication.userLoggedIAs.equals("Google")) {
+                    girlsList.add(girl);
+                } else {
+                    if (girl.isCensored()) {
+                        girlsList.add(girl);
+                    }
+                }
             }
-
+            Collections.shuffle(girlsList);
+            playVideoinBackground();
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        if (SplashScreen.userLoggedIn && SplashScreen.userLoggedIAs.equals("Google") && SplashScreen.App_updating.equals("inactive")) {
-            DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("Girls_Video/girls");
-            usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-
-
-                    for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
-
-                        String name = (String) userSnapshot.child("name").getValue();
-
-                        Long longValue = (Long) userSnapshot.child("age").getValue();
-                        int age = longValue.intValue();
-
-                        String videoUrl = (String) userSnapshot.child("videoUrl").getValue();
-
-                        Boolean booleanValue_censored = userSnapshot.child("censored").getValue(Boolean.class);
-                        boolean censored = booleanValue_censored.booleanValue();
-
-                        Boolean booleanValue_seen = userSnapshot.child("seen").getValue(Boolean.class);
-                        boolean seen = booleanValue_seen.booleanValue();
-
-                        Boolean booleanValue_liked = userSnapshot.child("liked").getValue(Boolean.class);
-                        boolean liked = booleanValue_liked.booleanValue();
-
-                        Girl girl = new Girl();
-                        girl.setName(name);
-                        girl.setAge(age);
-                        girl.setVideoUrl(videoUrl);
-                        girl.setCensored(censored);
-                        girl.setSeen(seen);
-                        girl.setLiked(liked);
-
-                        // Add the Girl object to the ArrayList
-                        girlsList.add(0, girl);
-
-                    }
-                    playVideoinBackground();
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    Log.d(SplashScreen.TAG, " userList.size(): " + databaseError.getMessage());
-                    playVideoinBackground();
-
-                }
-            });
-        } else {
-            playVideoinBackground();
-
-        }
-
-
     }
+
 
     private String loadJSONFromAsset() {
         String json = null;
@@ -595,7 +540,7 @@ public class CameraActivity extends AppCompatActivity {
             byte[] buffer = new byte[size];
             inputStream.read(buffer);
             inputStream.close();
-            json = new String(buffer, "UTF-8");
+            json = new String(buffer, StandardCharsets.UTF_8);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -846,7 +791,7 @@ public class CameraActivity extends AppCompatActivity {
 
     private void disclaimerDialog() {
 
-        final androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(CameraActivity.this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(CameraActivity.this);
         LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
         View promptView = inflater.inflate(R.layout.dialog_disclaimer, null);
         builder.setView(promptView);
@@ -913,7 +858,7 @@ public class CameraActivity extends AppCompatActivity {
     }
 
     private void showAds() {
-        if (SplashScreen.Ad_Network_Name.equals("admob")) {
+        if (MyApplication.Ad_Network_Name.equals("admob")) {
             ADS_ADMOB.Interstitial_Ad(this);
         } else {
             com.facebook.ads.InterstitialAd facebook_IntertitialAds = null;
@@ -1026,7 +971,7 @@ public class CameraActivity extends AppCompatActivity {
 
     private void blockUserDialog() {
 
-        final androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(CameraActivity.this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(CameraActivity.this);
         LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
         View promptView = inflater.inflate(R.layout.dialog_block_user, null);
         builder.setView(promptView);
@@ -1063,7 +1008,7 @@ public class CameraActivity extends AppCompatActivity {
 
     private void reportUserDialog() {
 
-        final androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(CameraActivity.this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(CameraActivity.this);
         LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
         View promptView = inflater.inflate(R.layout.dialog_report_user, null);
         builder.setView(promptView);
@@ -1101,7 +1046,7 @@ public class CameraActivity extends AppCompatActivity {
 
     private void reportUserSucessfullDialog() {
 
-        final androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(CameraActivity.this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(CameraActivity.this);
         LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
         View promptView = inflater.inflate(R.layout.dialog_report_user_sucessfull, null);
         builder.setView(promptView);

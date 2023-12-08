@@ -101,37 +101,35 @@ public class VipMembership extends AppCompatActivity {
         billingClient = BillingClient.newBuilder(this).enablePendingPurchases().setListener((billingResult, list) -> {
 
             if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK && list != null) {
+                boolean purchaseDone = false;
                 for (Purchase purchase : list) {
+                    consumePurchase(purchase);
+                    if (purchase.getPurchaseState() == Purchase.PurchaseState.PURCHASED && !purchase.isAcknowledged()) {
+                        //first this is triggerd than onResume is called
+                        verifyPurchase(purchase);
+                        purchaseDone = true;
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                progressBar.setVisibility(View.GONE);
+                                cancelScheduledAlarm();
+                                startActivity(new Intent(VipMembership.this, SplashScreen.class));
+                            }
+                        }, 5000);
 
-                    //first this is triggerd than onResume is called
+                    }
 
-                    verifyPurchase(purchase);
-
+                }
+                if (!purchaseDone) {
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), "Payment failed. If your money is deducted, it will be reflected back to your Bank Account soon", Snackbar.LENGTH_INDEFINITE);
-                            snackbar.setAction("Dismiss", new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    snackbar.dismiss();
-                                }
-                            });
-
-                            View snackbarView = snackbar.getView();
-                            AppCompatTextView textView = snackbarView.findViewById(com.google.android.material.R.id.snackbar_text);
-                            textView.setMaxLines(5); // Adjust this value as needed
-
-//                            snackbar.show();
                             progressBar.setVisibility(View.GONE);
-
                             cancelScheduledAlarm();
-                            startActivity(new Intent(VipMembership.this, SplashScreen.class));
+                            Toast.makeText(VipMembership.this, "Payment failed! try again", Toast.LENGTH_SHORT).show();
 
                         }
                     }, 5000);
-
-
                 }
             } else {
                 // Handle any other error codes.
@@ -422,6 +420,7 @@ public class VipMembership extends AppCompatActivity {
     }
 
 
+
     private void verifyPurchase(Purchase purchase) {
         int coins = 0;
         String inputString = purchase.getProducts().get(0);
@@ -432,20 +431,7 @@ public class VipMembership extends AppCompatActivity {
             coins = Integer.parseInt(number);
         }
 
-
         savePurchaseDetails_inSharedPreference(purchase.getPurchaseToken(), coins, purchase.getPurchaseTime());
-
-        ConsumeParams consumeParams = ConsumeParams.newBuilder().setPurchaseToken(purchase.getPurchaseToken()).build();
-        billingClient.consumeAsync(consumeParams, new ConsumeResponseListener() {
-            @Override
-            public void onConsumeResponse(@NonNull BillingResult billingResult, @NonNull String s) {
-                if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
-                    Log.d(SplashScreen.TAG, "Consumed: ");
-                }
-            }
-        });
-
-
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         DocumentReference documentRef = db.collection("purchases").document(purchase.getPurchaseToken());
 
@@ -492,7 +478,22 @@ public class VipMembership extends AppCompatActivity {
                 // Error occurred while retrieving the document
                 FirebaseFirestoreException exception = (FirebaseFirestoreException) task.getException();
                 // Handle the exception
-                Log.d(SplashScreen.TAG, "FirebaseFirestoreException: " + exception.getMessage());
+                Log.d(MyApplication.TAG, "FirebaseFirestoreException: " + exception.getMessage());
+            }
+        });
+
+
+    }
+
+    private void consumePurchase(Purchase purchase) {
+        ConsumeParams consumeParams = ConsumeParams.newBuilder().setPurchaseToken(purchase.getPurchaseToken()).build();
+        billingClient.consumeAsync(consumeParams, new ConsumeResponseListener() {
+            @Override
+            public void onConsumeResponse(@NonNull BillingResult billingResult, @NonNull String s) {
+
+                if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
+                    Log.d("asdfsdaf", "Consumed: "+purchase.getPurchaseToken());
+                }
             }
         });
 
@@ -756,7 +757,7 @@ public class VipMembership extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Log.d(SplashScreen.TAG, "backpressCount: " + backpressCount);
+        Log.d(MyApplication.TAG, "backpressCount: " + backpressCount);
         if (backpressCount == 0) {
             exit_dialog();
             backpressCount++;

@@ -21,7 +21,9 @@
           "dateTime": "",
           "nextMsgDelay": 20000,
           "read": 0,
-          "sent": 0
+          "sent": 0,
+          "messageType": "free",
+          "viewType": 2
         },
         {
           "id": 2,
@@ -31,7 +33,9 @@
           "dateTime": "",
           "nextMsgDelay": 5000,
           "read": 0,
-          "sent": 0
+          "sent": 0,
+          "messageType": "free",
+          "viewType": 2
         },
         {
           "id": 3,
@@ -41,7 +45,9 @@
           "dateTime": "",
           "nextMsgDelay": 5000,
           "read": 0,
-          "sent": 0
+          "sent": 0,
+          "messageType": "free",
+          "viewType": 2
         }
       ]
     },
@@ -78,7 +84,9 @@
             "dateTime": "",
             "nextMsgDelay": 5000,
             "read": 0,
-            "sent": 0
+            "sent": 0,
+            "messageType": "free",
+            "viewType": 2
           },
           {
             "id": 1,
@@ -88,7 +96,9 @@
             "dateTime": "",
             "nextMsgDelay": 15000,
             "read": 0,
-            "sent": 0
+            "sent": 0,
+            "messageType": "free",
+            "viewType": 2
           },
           {
             "id": 1,
@@ -98,7 +108,9 @@
             "dateTime": "",
             "nextMsgDelay": 15000,
             "read": 0,
-            "sent": 0
+            "sent": 0,
+            "messageType": "free",
+            "viewType": 2
           }
         ]
       }
@@ -124,7 +136,9 @@
           "dateTime": "",
           "nextMsgDelay": 20000,
           "read": 0,
-          "sent": 0
+          "sent": 0,
+          "messageType": "free",
+          "viewType": 2
         },
         {
           "id": 1,
@@ -134,7 +148,9 @@
           "dateTime": "",
           "nextMsgDelay": 20000,
           "read": 0,
-          "sent": 0
+          "sent": 0,
+          "messageType": "free",
+          "viewType": 2
         },
         {
           "id": 2,
@@ -144,7 +160,9 @@
           "dateTime": "",
           "nextMsgDelay": 40000,
           "read": 0,
-          "sent": 0
+          "sent": 0,
+          "messageType": "free",
+          "viewType": 2
         },
         {
           "id": 3,
@@ -154,7 +172,9 @@
           "dateTime": "",
           "nextMsgDelay": 40000,
           "read": 0,
-          "sent": 0
+          "sent": 0,
+          "messageType": "free",
+          "viewType": 2
         },
         {
           "id": 4,
@@ -164,7 +184,9 @@
           "dateTime": "",
           "nextMsgDelay": 40000,
           "read": 0,
-          "sent": 0
+          "sent": 0,
+          "messageType": "free",
+          "viewType": 2
         }
       ]
     },
@@ -189,7 +211,9 @@
           "dateTime": "",
           "nextMsgDelay": 30000,
           "read": 0,
-          "sent": 0
+          "sent": 0,
+          "messageType": "free",
+          "viewType": 2
         },
         {
           "id": 1,
@@ -199,7 +223,9 @@
           "dateTime": "",
           "nextMsgDelay": 30000,
           "read": 0,
-          "sent": 0
+          "sent": 0,
+          "messageType": "free",
+          "viewType": 2
         },
         {
           "id": 2,
@@ -209,7 +235,9 @@
           "dateTime": "",
           "nextMsgDelay": 30000,
           "read": 0,
-          "sent": 0
+          "sent": 0,
+          "messageType": "free",
+          "viewType": 2
         },
         {
           "id": 3,
@@ -219,7 +247,9 @@
           "dateTime": "",
           "nextMsgDelay": 30000,
           "read": 0,
-          "sent": 0
+          "sent": 0,
+          "messageType": "free",
+          "viewType": 2
         },
         {
           "id": 4,
@@ -229,7 +259,9 @@
           "dateTime": "",
           "nextMsgDelay": 20000,
           "read": 0,
-          "sent": 0
+          "sent": 0,
+          "messageType": "free",
+          "viewType": 2
         },
         {
           "id": 5,
@@ -239,7 +271,9 @@
           "dateTime": "",
           "nextMsgDelay": 20000,
           "read": 0,
-          "sent": 0
+          "sent": 0,
+          "messageType": "free",
+          "viewType": 2
         }
       ]
     },
@@ -264,7 +298,9 @@
           "dateTime": "",
           "nextMsgDelay": 20000,
           "read": 0,
-          "sent": 0
+          "sent": 0,
+          "messageType": "free",
+          "viewType": 2
         },
         {
           "id": 1,
@@ -274,7 +310,9 @@
           "dateTime": "",
           "nextMsgDelay": 20000,
           "read": 0,
-          "sent": 0
+          "sent": 0,
+          "messageType": "free",
+          "viewType": 2
         },
         {
           "id": 2,
@@ -284,7 +322,9 @@
           "dateTime": "",
           "nextMsgDelay": 5000,
           "read": 0,
-          "sent": 0
+          "sent": 0,
+          "messageType": "free",
+          "viewType": 2
         },
         {
           "id": 3,
@@ -294,7 +334,9 @@
           "dateTime": "",
           "nextMsgDelay": 5000,
           "read": 0,
-          "sent": 0
+          "sent": 0,
+          "messageType": "free",
+          "viewType": 2
         },
         {
           "id": 4,
@@ -304,7 +346,9 @@
           "dateTime": "",
           "nextMsgDelay": 7000,
           "read": 0,
-          "sent": 0
+          "sent": 0,
+          "messageType": "free",
+          "viewType": 2
         }
       ]
     },
@@ -329,7 +373,9 @@
           "dateTime": "",
           "nextMsgDelay": 20000,
           "read": 0,
-          "sent": 0
+          "sent": 0,
+          "messageType": "free",
+          "viewType": 2
         },
         {
           "id": 1,
@@ -339,7 +385,9 @@
           "dateTime": "",
           "nextMsgDelay": 20000,
           "read": 0,
-          "sent": 0
+          "sent": 0,
+          "messageType": "free",
+          "viewType": 2
         },
         {
           "id": 2,
@@ -349,7 +397,9 @@
           "dateTime": "",
           "nextMsgDelay": 5000,
           "read": 0,
-          "sent": 0
+          "sent": 0,
+          "messageType": "free",
+          "viewType": 2
         },
         {
           "id": 3,
@@ -359,7 +409,9 @@
           "dateTime": "",
           "nextMsgDelay": 5000,
           "read": 0,
-          "sent": 0
+          "sent": 0,
+          "messageType": "free",
+          "viewType": 2
         },
         {
           "id": 4,
@@ -369,7 +421,9 @@
           "dateTime": "",
           "nextMsgDelay": 5000,
           "read": 0,
-          "sent": 0
+          "sent": 0,
+          "messageType": "free",
+          "viewType": 2
         }
       ]
     },
@@ -382,7 +436,7 @@
       "content": [],
       "users": "9200",
       "answerRate": "100",
-      "userProfile": "https://bucket2266.blr1.cdn.digitaloceanspaces.com/FirebaseFolders/cute-desi-muslim-girl-ki-nude-photos/1.png",
+      "userProfile": "https://bucket2266.blr1.cdn.digitaloceanspaces.com/VideoChatProfiles/Indian/caseydeluxe/profile.jpg",
       "containsQuestion": false,
       "recommendationType": "Nearby",
       "userBotMsg": [
@@ -394,7 +448,9 @@
           "dateTime": "",
           "nextMsgDelay": 20000,
           "read": 0,
-          "sent": 0
+          "sent": 0,
+          "messageType": "free",
+          "viewType": 2
         },
         {
           "id": 1,
@@ -404,7 +460,9 @@
           "dateTime": "",
           "nextMsgDelay": 20000,
           "read": 0,
-          "sent": 0
+          "sent": 0,
+          "messageType": "free",
+          "viewType": 2
         },
         {
           "id": 2,
@@ -414,7 +472,9 @@
           "dateTime": "",
           "nextMsgDelay": 20000,
           "read": 0,
-          "sent": 0
+          "sent": 0,
+          "messageType": "free",
+          "viewType": 2
         }
       ]
     },
@@ -439,7 +499,9 @@
           "dateTime": "",
           "nextMsgDelay": 20000,
           "read": 0,
-          "sent": 0
+          "sent": 0,
+          "messageType": "free",
+          "viewType": 2
         },
         {
           "id": 1,
@@ -449,7 +511,9 @@
           "dateTime": "",
           "nextMsgDelay": 30000,
           "read": 0,
-          "sent": 0
+          "sent": 0,
+          "messageType": "free",
+          "viewType": 2
         },
         {
           "id": 2,
@@ -459,7 +523,9 @@
           "dateTime": "",
           "nextMsgDelay": 20000,
           "read": 0,
-          "sent": 0
+          "sent": 0,
+          "messageType": "free",
+          "viewType": 2
         },
         {
           "id": 3,
@@ -469,7 +535,9 @@
           "dateTime": "",
           "nextMsgDelay": 20000,
           "read": 0,
-          "sent": 0
+          "sent": 0,
+          "messageType": "free",
+          "viewType": 2
         },
         {
           "id": 4,
@@ -479,7 +547,9 @@
           "dateTime": "",
           "nextMsgDelay": 30000,
           "read": 0,
-          "sent": 0
+          "sent": 0,
+          "messageType": "free",
+          "viewType": 2
         }
       ]
     },
@@ -516,7 +586,9 @@
             "dateTime": "",
             "nextMsgDelay": 5000,
             "read": 0,
-            "sent": 0
+            "sent": 0,
+            "messageType": "free",
+            "viewType": 2
           },
           {
             "id": 1,
@@ -526,7 +598,9 @@
             "dateTime": "",
             "nextMsgDelay": 15000,
             "read": 0,
-            "sent": 0
+            "sent": 0,
+            "messageType": "free",
+            "viewType": 2
           },
           {
             "id": 1,
@@ -536,7 +610,9 @@
             "dateTime": "",
             "nextMsgDelay": 15000,
             "read": 0,
-            "sent": 0
+            "sent": 0,
+            "messageType": "free",
+            "viewType": 2
           }
         ]
       }
@@ -562,7 +638,9 @@
           "dateTime": "",
           "nextMsgDelay": 10000,
           "read": 0,
-          "sent": 0
+          "sent": 0,
+          "messageType": "free",
+          "viewType": 2
         },
         {
           "id": 1,
@@ -572,7 +650,9 @@
           "dateTime": "",
           "nextMsgDelay": 20000,
           "read": 0,
-          "sent": 0
+          "sent": 0,
+          "messageType": "free",
+          "viewType": 2
         },
         {
           "id": 2,
@@ -582,7 +662,9 @@
           "dateTime": "",
           "nextMsgDelay": 30000,
           "read": 0,
-          "sent": 0
+          "sent": 0,
+          "messageType": "free",
+          "viewType": 2
         },
         {
           "id": 3,
@@ -592,7 +674,9 @@
           "dateTime": "",
           "nextMsgDelay": 40000,
           "read": 0,
-          "sent": 0
+          "sent": 0,
+          "messageType": "free",
+          "viewType": 2
         }
       ]
     }

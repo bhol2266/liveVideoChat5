@@ -16,19 +16,7 @@
         <!-- Customize your theme here. -->
     </style>
     <!-- Base application theme. -->
-    <style name="Base.Theme.LiveVideoChat" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
 
-    </style>
-
-
-    <style name="tabText">
-        <item name="android:textSize">20dp</item><!-- text size in menu-->
-        <item name="android:fontFamily">@font/inter</item><!-- text size in menu-->
-        <item name="android:background">@drawable/hooverffext</item><!-- text size in menu-->
-    </style>
 
     <style name="ThemeOverlay.AppTheme.TextInputEditText.Outlined" parent="">
         <item name="colorPrimary">@color/themeColor</item>
@@ -37,11 +25,40 @@
 
     <!--    bottomsheet dialog rounded corners-->
 
-    <style name="AppBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
-        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+
+    <style name="roundedImageView" parent="">
+
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">10dp</item>
+        <item name="color">@color/white</item>
     </style>
 
-    <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
-        <item name="android:background">@drawable/bg_bottom_sheet_dialog</item>
+
+    <style name="DatePickerDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+
+        <!--        <item name="android:datePickerMode">calendar</item>-->
+        <item name="colorAccent">@color/themeColor</item>
+
+        <item name="android:datePickerStyle">@style/CustomDatePickerStyle</item>
+        <!-- Customize the OK button -->
+        <item name="android:buttonBarButtonStyle">@style/CustomButtonBarButtonStyle</item>
+
+        <!-- Customize the Cancel button -->
+        <item name="android:buttonBarNegativeButtonStyle">@style/CustomButtonBarButtonStyle</item>
+
+    </style>
+
+    <style name="CustomDatePickerStyle" parent="@android:style/Widget.Material.Light.DatePicker">
+        <!-- Set the background color for the header -->
+        <item name="android:headerBackground">@color/themeColor</item>
+    </style>
+
+    <style name="CustomButtonBarButtonStyle" parent="@style/Widget.AppCompat.Button.Borderless">
+        <!-- Set text color for the buttons -->
+        <item name="android:textColor">@color/themeColor</item>
+
+        <!-- Set background color for the buttons -->
+
+        <!-- Add other button style attributes as needed -->
     </style>
 </resources>

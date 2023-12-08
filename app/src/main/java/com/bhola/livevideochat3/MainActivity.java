@@ -1,13 +1,7 @@
 package com.bhola.livevideochat3;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.viewpager2.widget.ViewPager2;
-
+import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -19,14 +13,25 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.Manifest;
+
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -39,12 +44,13 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private int CAMERA_PERMISSION_REQUEST_CODE = 123;
+    private final int CAMERA_PERMISSION_REQUEST_CODE = 123;
     final int NOTIFICATION_REQUEST_CODE = 112;
     public static TextView badge_text;
     public static int unreadMessage_count;
     public static ViewPager2 viewPager2;
     com.facebook.ads.InterstitialAd facebook_IntertitialAds;
+    private InAppUpdate inAppUpdate;
 
 
     @Override
@@ -52,7 +58,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (SplashScreen.Ads_State.equals("active")) {
+        try {
+            //Crashlytics error
+            String userId = String.valueOf(MyApplication.userModel.getUserId());
+        } catch (Exception e) {
+            startActivity(new Intent(MainActivity.this, SplashScreen.class));
+            finish();
+            return;
+        }
+        checkForupdate();
+        getUserLocation_Permission();
+        startIncomingCallService();
+
+
+        if (MyApplication.Ads_State.equals("active")) {
             showAds();
         }
 
@@ -61,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         startVideoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (checkSelfPermission(android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
                     requestPermissions(new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_REQUEST_CODE);
                 } else {
                     startActivity(new Intent(MainActivity.this, CameraActivity.class));
@@ -70,8 +89,57 @@ public class MainActivity extends AppCompatActivity {
         });
 
         initializeBottonFragments();
-        askForNotificationPermission(); //Android 13 and higher
 
+    }
+
+    private void startIncomingCallService() {
+        if (MyApplication.App_updating.equals("active")) {
+            return;
+        }
+//        Intent intent = new Intent(MainActivity.this, IncomingCallService.class);
+//        startService(intent);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                showFragment();
+            }
+        }, 20000);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                showFragment();
+            }
+        }, 90000);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                showFragment();
+            }
+        }, 210000);
+
+    }
+
+    private void showFragment() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+
+        if (!fragmentManager.isDestroyed()) {
+            try {
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                Fragment_Calling fragment = new Fragment_Calling();
+
+                String name = Utils.getSingleRandomGirlVideo(MainActivity.this);
+                Bundle args = new Bundle();
+                args.putString("name", name);
+                fragment.setArguments(args);
+                fragmentTransaction.replace(R.id.fragment_container, fragment);
+                fragmentTransaction.commit();
+            } catch (Exception e) {
+
+            }
+        }
 
 
     }
@@ -90,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
                         tab.setIcon(R.drawable.videocall);
 
                         View view1 = getLayoutInflater().inflate(R.layout.customtab, null);
-                        view1.findViewById(R.id.icon).setBackgroundResource(R.drawable.videocall);
+                        view1.findViewById(R.id.icon).setBackgroundResource(R.drawable.videocall2);
                         tab.setCustomView(view1);
 
                         //By default tab 0 will be selected to change the tint of that tab
@@ -194,12 +262,12 @@ public class MainActivity extends AppCompatActivity {
 
     private int getUndreadMessage_Count() {
 
-        ArrayList<ChatItem_ModelClass> userListTemp=new ArrayList<>();
+        ArrayList<ChatItem_ModelClass> userListTemp = new ArrayList<>();
         SharedPreferences sharedPreferences = MainActivity.this.getSharedPreferences("messenger_chats", Context.MODE_PRIVATE);
 
 // Retrieve the JSON string from SharedPreferences
-        String json="";
-        if (SplashScreen.userLoggedIn && SplashScreen.userLoggedIAs.equals("Google")) {
+        String json = "";
+        if (MyApplication.userLoggedIn && MyApplication.userLoggedIAs.equals("Google")) {
             json = sharedPreferences.getString("userListTemp_Google", null);
         } else {
             json = sharedPreferences.getString("userListTemp_Guest", null);
@@ -270,45 +338,55 @@ public class MainActivity extends AppCompatActivity {
     private void askForNotificationPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-                requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS);
+                ActivityCompat.requestPermissions((Activity) MainActivity.this, new String[]{Manifest.permission.POST_NOTIFICATIONS}, NOTIFICATION_REQUEST_CODE);
 
-                new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(MainActivity.this, "Allow Notification for Daily new Stories ", Toast.LENGTH_LONG).show();
-                    }
-                }, 1000);
             }
         }
     }
 
+    private void getUserLocation_Permission() {
 
-    private final ActivityResultLauncher<String> requestPermissionLauncher =
-            registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
-                if (isGranted) {
-                    // Permission is granted. Continue the action or workflow in your
-                    // app.
-                } else {
-                    // Explain to the user that the feature is unavailable because the
-                    // feature requires a permission that the user has denied. At the
-                    // same time, respect the user's decision. Don't link to system
-                    // settings in an effort to convince the user to change their
-                    // decision.
+        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+        } else {
+            // Permission not granted, request it
+            requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION);
+
+        }
+    }
+
+    private final ActivityResultLauncher<String> requestPermissionLauncher = registerForActivityResult(
+            new ActivityResultContracts.RequestPermission(),
+            new ActivityResultCallback<Boolean>() {
+                @Override
+                public void onActivityResult(Boolean result) {
+                    Log.d(MyApplication.TAG, "requestCode: " + result);
+                    if (result) {
+                        Utils.getLocation(MainActivity.this);
+                        askForNotificationPermission();
+                    } else {
+                        // PERMISSION NOT GRANTED
+                    }
                 }
-            });
-
+            }
+    );
 
     @Override
     public void onBackPressed() {
         exit_dialog();
-        if (SplashScreen.Ads_State.equals("active")) {
+        if (MyApplication.Ads_State.equals("active")) {
             showAds();
         }
     }
 
+    private void checkForupdate() {
+        inAppUpdate = new InAppUpdate(MainActivity.this);
+        inAppUpdate.checkForAppUpdate();
+
+    }
+
     private void exit_dialog() {
 
-        final androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(MainActivity.this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
         View promptView = inflater.inflate(R.layout.dialog_exit_app, null);
         builder.setView(promptView);
@@ -326,10 +404,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (SplashScreen.exit_Refer_appNavigation.equals("active") && SplashScreen.Login_Times < 2 && SplashScreen.Refer_App_url2.length() > 10) {
+                if (MyApplication.exit_Refer_appNavigation.equals("active") && MyApplication.Login_Times < 2 && MyApplication.Refer_App_url2.length() > 10) {
 
                     Intent j = new Intent(Intent.ACTION_VIEW);
-                    j.setData(Uri.parse(SplashScreen.Refer_App_url2));
+                    j.setData(Uri.parse(MyApplication.Refer_App_url2));
                     try {
                         startActivity(j);
                     } catch (Exception e) {
@@ -372,7 +450,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showAds() {
-        if (SplashScreen.Ad_Network_Name.equals("admob")) {
+        if (MyApplication.Ad_Network_Name.equals("admob")) {
             if (!SplashScreen.homepageAdShown) {
                 ADS_ADMOB.Interstitial_Ad(this);
                 SplashScreen.homepageAdShown = true;
