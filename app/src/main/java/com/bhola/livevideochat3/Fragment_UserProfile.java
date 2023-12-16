@@ -168,7 +168,6 @@ public class Fragment_UserProfile extends Fragment {
 
     private void notificationBar() {
 
-        Fragment_Messenger.updateUnreadmessageCount(context);
         CardView notificationCard = view.findViewById(R.id.notificationCard);
         if (MainActivity.unreadMessage_count == 0) {
             notificationCard.setVisibility(View.INVISIBLE);
