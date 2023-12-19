@@ -31,7 +31,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatTextView;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -47,11 +46,9 @@ import com.android.billingclient.api.ConsumeResponseListener;
 import com.android.billingclient.api.ProductDetails;
 import com.android.billingclient.api.ProductDetailsResponseListener;
 import com.android.billingclient.api.Purchase;
-import com.android.billingclient.api.PurchasesResponseListener;
 import com.android.billingclient.api.QueryProductDetailsParams;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.common.collect.ImmutableList;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -77,7 +74,7 @@ public class VipMembership extends AppCompatActivity {
     AlertDialog dialog;
     private BillingClient billingClient;
     LinearLayout progressBar;
-    TextView buyNowTimer, offerTimer,offerTextview;
+    TextView buyNowTimer, offerTimer, offerTextview;
 
     private BroadcastReceiver timerUpdateReceiver, timerUpdateReceiverCheck;
     private boolean isTimerRunning = false;
@@ -177,6 +174,8 @@ public class VipMembership extends AppCompatActivity {
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 registerReceiver(timerUpdateReceiverCheck, filter, Context.RECEIVER_NOT_EXPORTED);
+            } else {
+                registerReceiver(timerUpdateReceiverCheck, filter);
             }
         }
 
@@ -398,19 +397,14 @@ public class VipMembership extends AppCompatActivity {
                     // An activity reference from which the billing flow will be launched.
                     Activity activity = VipMembership.this;
 
-                    ImmutableList productDetailsParamsList =
-                            ImmutableList.of(
-                                    BillingFlowParams.ProductDetailsParams.newBuilder()
-                                            // retrieve a value for "productDetails" by calling queryProductDetailsAsync()
-                                            .setProductDetails(finalProductDetails)
-                                            // to get an offer token, call ProductDetails.getSubscriptionOfferDetails()
-                                            // for a list of offers that are available to the user
-                                            .build()
-                            );
+                    ImmutableList productDetailsParamsList = ImmutableList.of(BillingFlowParams.ProductDetailsParams.newBuilder()
+                            // retrieve a value for "productDetails" by calling queryProductDetailsAsync()
+                            .setProductDetails(finalProductDetails)
+                            // to get an offer token, call ProductDetails.getSubscriptionOfferDetails()
+                            // for a list of offers that are available to the user
+                            .build());
 
-                    BillingFlowParams billingFlowParams = BillingFlowParams.newBuilder()
-                            .setProductDetailsParamsList(productDetailsParamsList)
-                            .build();
+                    BillingFlowParams billingFlowParams = BillingFlowParams.newBuilder().setProductDetailsParamsList(productDetailsParamsList).build();
 
 // Launch the billing flow
                     billingClient.launchBillingFlow(activity, billingFlowParams);
@@ -420,7 +414,6 @@ public class VipMembership extends AppCompatActivity {
         });
 
     }
-
 
 
     private void verifyPurchase(Purchase purchase) {
@@ -494,7 +487,7 @@ public class VipMembership extends AppCompatActivity {
             public void onConsumeResponse(@NonNull BillingResult billingResult, @NonNull String s) {
 
                 if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
-                    Log.d("asdfsdaf", "Consumed: "+purchase.getPurchaseToken());
+                    Log.d("asdfsdaf", "Consumed: " + purchase.getPurchaseToken());
                 }
             }
         });
@@ -590,19 +583,14 @@ public class VipMembership extends AppCompatActivity {
                 // An activity reference from which the billing flow will be launched.
                 Activity activity = VipMembership.this;
 
-                ImmutableList productDetailsParamsList =
-                        ImmutableList.of(
-                                BillingFlowParams.ProductDetailsParams.newBuilder()
-                                        // retrieve a value for "productDetails" by calling queryProductDetailsAsync()
-                                        .setProductDetails(productDetails)
-                                        // to get an offer token, call ProductDetails.getSubscriptionOfferDetails()
-                                        // for a list of offers that are available to the user
-                                        .build()
-                        );
+                ImmutableList productDetailsParamsList = ImmutableList.of(BillingFlowParams.ProductDetailsParams.newBuilder()
+                        // retrieve a value for "productDetails" by calling queryProductDetailsAsync()
+                        .setProductDetails(productDetails)
+                        // to get an offer token, call ProductDetails.getSubscriptionOfferDetails()
+                        // for a list of offers that are available to the user
+                        .build());
 
-                BillingFlowParams billingFlowParams = BillingFlowParams.newBuilder()
-                        .setProductDetailsParamsList(productDetailsParamsList)
-                        .build();
+                BillingFlowParams billingFlowParams = BillingFlowParams.newBuilder().setProductDetailsParamsList(productDetailsParamsList).build();
 
 // Launch the billing flow
                 billingClient.launchBillingFlow(activity, billingFlowParams);
@@ -617,19 +605,14 @@ public class VipMembership extends AppCompatActivity {
                 // An activity reference from which the billing flow will be launched.
                 Activity activity = VipMembership.this;
 
-                ImmutableList productDetailsParamsList =
-                        ImmutableList.of(
-                                BillingFlowParams.ProductDetailsParams.newBuilder()
-                                        // retrieve a value for "productDetails" by calling queryProductDetailsAsync()
-                                        .setProductDetails(productDetails)
-                                        // to get an offer token, call ProductDetails.getSubscriptionOfferDetails()
-                                        // for a list of offers that are available to the user
-                                        .build()
-                        );
+                ImmutableList productDetailsParamsList = ImmutableList.of(BillingFlowParams.ProductDetailsParams.newBuilder()
+                        // retrieve a value for "productDetails" by calling queryProductDetailsAsync()
+                        .setProductDetails(productDetails)
+                        // to get an offer token, call ProductDetails.getSubscriptionOfferDetails()
+                        // for a list of offers that are available to the user
+                        .build());
 
-                BillingFlowParams billingFlowParams = BillingFlowParams.newBuilder()
-                        .setProductDetailsParamsList(productDetailsParamsList)
-                        .build();
+                BillingFlowParams billingFlowParams = BillingFlowParams.newBuilder().setProductDetailsParamsList(productDetailsParamsList).build();
 
 // Launch the billing flow
                 billingClient.launchBillingFlow(activity, billingFlowParams);
@@ -656,8 +639,10 @@ public class VipMembership extends AppCompatActivity {
         filter.addAction("timer-update");
         filter.addAction("timer-finish");
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             registerReceiver(timerUpdateReceiver, filter, Context.RECEIVER_NOT_EXPORTED);
+        } else {
+            registerReceiver(timerUpdateReceiver, filter);
         }
 
         Intent intent = new Intent(this, TimerService.class);

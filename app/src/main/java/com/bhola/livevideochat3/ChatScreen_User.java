@@ -120,8 +120,7 @@ public class ChatScreen_User extends Activity {
         }
 
         getModalClass();
-        sendDataRecyclerview();
-        actionbar();
+
         bottomBtns();
 
 
@@ -478,6 +477,7 @@ public class ChatScreen_User extends Activity {
         }
         if (modelClass != null) {
             Fragment_Messenger.currentActiveUser = modelClass.getUserName();
+            sendDataRecyclerview();
         } else {
             startActivity(new Intent(ChatScreen_User.this, MainActivity.class));
         }

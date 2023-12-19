@@ -89,7 +89,10 @@ public class Fragment_Calling extends Fragment {
         mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                endcall.performClick();
+                try {
+                    endcall.performClick();
+                } catch (Exception e) {
+                }
             }
         }, 15000);
     }
@@ -130,7 +133,7 @@ public class Fragment_Calling extends Fragment {
         });
         String videoPath = MyApplication.databaseURL_video + "DesiChatVideos/" + name + ".mp4";
 
-        Log.d("sdafsda", "videoPath: "+videoPath);
+        Log.d("sdafsda", "videoPath: " + videoPath);
 
         Uri videoUri = Uri.parse(videoPath);
         videoView.setVideoURI(videoUri);
