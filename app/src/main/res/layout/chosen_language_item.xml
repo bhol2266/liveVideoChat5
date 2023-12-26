@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/languageLayout"
+    android:elevation="0dp"
+    app:cardElevation="0dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginRight="8dp"
+    app:cardBackgroundColor="@color/themehover"
+    app:cardCornerRadius="15dp">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp">
+
+
+        <TextView
+            android:id="@+id/languageName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:text="language"
+            android:textColor="@color/semiblack"
+            android:textSize="14dp" />
+
+        <ImageView
+            android:id="@+id/crossIcon"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/languageName"
+            android:padding="5dp"
+            android:src="@drawable/cross"
+            app:tint="@color/gmts_light_gray" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

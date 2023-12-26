@@ -1,45 +1,26 @@
 {
   "project_info": {
-    "project_number": "469455929790",
-    "firebase_url": "https://live-video-chat-2-ad65b-default-rtdb.asia-southeast1.firebasedatabase.app",
-    "project_id": "live-video-chat-2-ad65b",
-    "storage_bucket": "live-video-chat-2-ad65b.appspot.com"
+    "project_number": "252219919481",
+    "project_id": "live-video-chat-5-fdc3a",
+    "storage_bucket": "live-video-chat-5-fdc3a.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:469455929790:android:f7157d23ab97f78de979ef",
+        "mobilesdk_app_id": "1:252219919481:android:6de4a8e5dbff52bdaf18a8",
         "android_client_info": {
-          "package_name": "com.bhola.livevideochat3"
+          "package_name": "com.bhola.livevideochat5"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "469455929790-s91ndr5ptt3ugfos62c3ahactc5j86fs.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.bhola.livevideochat3",
-            "certificate_hash": "ea9ebb17d0b5b9dbe882c4492b6f40153960aabd"
-          }
-        },
-        {
-          "client_id": "469455929790-knhdh3lltvqa40den1e2tvi9ck963osk.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyA-tr8wIIaceB3ix5aEjrdMd9kKixQZB1w"
+          "current_key": "AIzaSyDx3xO7uf3mHxsjcuoaO1d0PiPpJlDzTKA"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "469455929790-knhdh3lltvqa40den1e2tvi9ck963osk.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }

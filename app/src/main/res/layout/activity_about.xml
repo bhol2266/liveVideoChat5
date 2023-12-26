@@ -57,7 +57,7 @@
         android:layout_centerInParent="true"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/inter"
-        android:text="Indian Girls - Video Chat App"
+        android:text="Juicy Girls - Video Chat App"
         android:textColor="@color/themeColor"
         android:textSize="18dp" />
 
@@ -81,7 +81,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:fontFamily="@font/inter"
-        android:text="Indian Girls Team"
+        android:text="Juicy Girls Team"
         android:textColor="@color/semiblack"
         android:textStyle="bold"
         android:textSize="17dp" />
