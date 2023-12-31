@@ -7,10 +7,11 @@
     <color name="black">#FF000000</color>
     <color name="semiblack">#2E2E2E</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="themeColor">#000C40</color>
-    <color name="themeColor2">#F0F2F0</color>
-    <color name="themeColorlight">#828AAC</color>
-    <color name="themeColorExtralight">#D7E5FF</color>
+    <color name="themeColor">#0040d1</color>
+    <color name="themeColor2">#3494E6</color>
+    <color name="themeColorlight">#9BC8EF</color>
+
+    <color name="themeColorExtralight">#E3EBFF</color>
     <color name="grey">#BF707070</color>
     <color name="themehover">#EFF5FF</color>
 

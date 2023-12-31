@@ -34,7 +34,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/rubrik_semibold"
-                android:text="Indian Video Chat Team"
+                android:text="Juicy Video Chat Team"
                 android:textColor="@color/black"
                 android:textSize="18dp"
                 android:textStyle="bold" />

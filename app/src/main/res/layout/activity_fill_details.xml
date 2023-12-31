@@ -277,19 +277,21 @@
     </LinearLayout>
 
 
-    <Button
+    <TextView
         android:id="@+id/nextBtn"
         android:layout_width="250dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_gravity="center"
         android:layout_marginTop="60dp"
-        android:alpha="0.5"
         android:background="@drawable/btn_bg"
         android:fontFamily="@font/rubrik_bold"
-        android:paddingTop="8dp"
+        android:textColor="@color/white"
+        android:textAlignment="center"
+        android:paddingTop="5dp"
+        android:gravity="center"
         android:paddingBottom="8dp"
         android:text="Next"
-        android:textSize="20dp" />
+        android:textSize="24dp" />
 
 
 </LinearLayout>

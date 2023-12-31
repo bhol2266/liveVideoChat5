@@ -52,7 +52,7 @@ public class Fill_details extends AppCompatActivity {
     String selectedGender = "";
     EditText nickName;
     String Birthday = "";
-    Button nextBtn;
+    TextView nextBtn;
     String photoUrl;
     int userId;
     private final int PROFILE_IMAGE_CODE = 222;
@@ -300,7 +300,7 @@ public class Fill_details extends AppCompatActivity {
 
     private void btnStatus() {
         if (nickName.getText().toString().length() > 0 && selectedGender.length() > 0 && Birthday.length() > 0) {
-            nextBtn.setAlpha(1);
+            nextBtn.setAlpha(1.0F);
         } else {
             nextBtn.setAlpha(0.5F);
         }
